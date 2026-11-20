@@ -13,7 +13,7 @@
 "CVS Health / Aetna": 4,
 "Centene": 3,
 "Cigna / Evernorth": 2,
-"Citi": 3,
+"Citi": 4,
 "Computer Enterprises, Inc.": 1,
 "Elevance Health": 1,
 "Evans Transportation Services, LLC": 1,
@@ -33,6 +33,7 @@
 "Randstad Digital": 1,
 "Raymond James": 2,
 "SHARP HEALTHCARE": 1,
+"STORD": 1,
 "SYSTEM SOFT TECHNOLOGIES LLC": 1,
 "State Street": 1,
 "Stellar Professionals LLC": 2,
@@ -41,6 +42,7 @@
 "The Hartford": 1,
 "Thermo Fisher": 1,
 "Two95 International Inc.": 1,
+"U.S. Bank": 1,
 "UniqueHire Consulting LLC": 1
 },
 "empty": {
@@ -56,10 +58,10 @@
 "Thermo Fisher": 1,
 "Zillow": 1
 },
-"lower": 17,
+"lower": 18,
 "reposts": 0,
-"runs": 19,
+"runs": 20,
 "tier1": 19,
-"tier2": 24,
+"tier2": 26,
 "week": "2026-W47"
 }
