@@ -5,15 +5,19 @@
   "max_min_years": 6,
   "location_exclude": "\\b(india|bangalore|bengaluru|hyderabad|pune|chennai|gurgaon|gurugram|noida|mumbai|canada|toronto|vancouver|montreal|london|united kingdom|\\bUK\\b|ireland|dublin|germany|berlin|poland|warsaw|krakow|mexico|brazil|philippines|manila|israel|tel aviv|australia|sydney|singapore|costa rica|argentina|colombia|spain|portugal|netherlands|amsterdam|france|paris|japan|china|hong kong)\\b",
   "no_sponsorship_phrases": [
-   "(will not|won't|cannot|can't|do not|does not|don't|unable to|not able to|is not able to|are not able to)\\s+(offer|provide|support|consider)?\\s*(visa |employment |immigration |h-?1b )?sponsor",
-   "no (visa |employment |immigration |h-?1b )?sponsorship",
-   "sponsorship (is |will )?not (be )?(available|offered|provided|supported)",
-   "not (open|eligible) (to|for) (visa |employment )?sponsorship",
-   "without (the )?(need for )?(current or future |now or in the future )?(visa |employer |employment |company )?sponsorship",
-   "must be (a )?(u\\.?s\\.? citizen|united states citizen|green card holder)",
-   "u\\.?s\\.? citizenship (is )?required",
-   "(active |current )?(secret|top secret|ts/sci) (security )?clearance (is )?required",
-   "not (currently )?sponsoring"
+   "(will not|won't|cannot|can't|do not|does not|don't|unable to|not able to|is not able to|are not able to|will not be able to|are unable to)\\s+(currently\\s+)?(be\\s+able\\s+to\\s+)?(offer|provide|support|consider|pursue|accept)?\\s*([\\w-]+\\s+){0,3}?sponsor",
+   "\\bno\\s+([\\w-]+\\s+){0,3}?sponsorship",
+   "sponsorship\\b[^.;]{0,60}?\\b(is|are|will|would|can)\\s+not\\s+(be\\s+)?(available|offered|provided|supported|considered|possible)",
+   "(not\\s+|in)eligible\\s+(to|for)\\s+([\\w-]+\\s+){0,3}?sponsorship|not\\s+open\\s+to\\s+([\\w-]+\\s+){0,3}?sponsorship",
+   "without\\s+(the\\s+)?(need\\s+for|requiring|requirement\\s+of|use\\s+of)?\\s*([\\w/-]+\\s+){0,5}?sponsorship",
+   "(require|need)s?\\s+([\\w-]+\\s+){0,3}?sponsorship[^.;]{0,60}?\\b(not|ineligible|won't|cannot)\\b",
+   "sponsorship(\\s+(is\\s+)?(available|offered|provided))?\\s*[:?]\\s*(no|none|not available|n/a)\\b",
+   "not\\s+(currently\\s+)?(sponsoring|offering\\s+(visa\\s+)?sponsorship)",
+   "must\\s+be\\s+(a\\s+)?(u\\.?s\\.?\\s+citizen|united states citizen|green card holder)",
+   "u\\.?s\\.?\\s+citizenship\\s+(is\\s+)?required",
+   "(active\\s+|current\\s+)?(secret|top secret|ts/sci)\\s+(security\\s+)?clearance\\s+(is\\s+)?required",
+   "(?-i:\\b(?:OPT|CPT|STEM OPT|F-?1)\\b)[^.;]{0,50}?\\b(not|ineligible|unable|cannot|excluded)\\b",
+   "\\b(not|no|cannot|unable to|don't|do not|won't|will not)\\b[^.;]{0,50}?(?-i:\\b(?:OPT|CPT|F-?1)\\b)"
   ],
   "max_age_days": 2
  },

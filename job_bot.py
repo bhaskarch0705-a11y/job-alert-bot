@@ -315,15 +315,18 @@ def load_detail(job):
     """Fill in the description for feeds (Workday) that list jobs without it."""
     if job.get("text") or not job.get("detail_url"):
         return
-    try:
-        info = fetch_json(job["detail_url"]).get("jobPostingInfo") or {}
-        job["text"] = strip_html(info.get("jobDescription", ""))
-        if info.get("location"):
-            job["location"] = info["location"]
-        if info.get("externalUrl"):
-            job["url"] = info["externalUrl"]
-    except Exception:
-        job["text"] = ""
+    for attempt in range(2):
+        try:
+            info = fetch_json(job["detail_url"]).get("jobPostingInfo") or {}
+            job["text"] = strip_html(info.get("jobDescription", ""))
+            if info.get("location"):
+                job["location"] = info["location"]
+            if info.get("externalUrl"):
+                job["url"] = info["externalUrl"]
+            return
+        except Exception:
+            job["text"] = ""
+            time.sleep(2)
 
 # ---------- filtering and scoring ----------
 
@@ -506,6 +509,9 @@ def check_job(job):
     load_detail(job)
     if LOCATION_EXCLUDE and LOCATION_EXCLUDE.search(job["location"] or ""):
         return False, "location"
+    if job.get("detail_url") and not job["text"]:
+        # Description did not load, so the sponsorship check cannot run. Retry next round.
+        return False, "no description"
     m = NO_SPONSOR.search(job["text"])
     if m:
         return False, f"no sponsorship: '{m.group(0)}'"
@@ -764,7 +770,10 @@ def main():
         return
 
     today = NOW.date().isoformat()
+    retry = {j["id"] for j, (_, why) in zip(to_check, verdicts) if why == "no description"}
     for j in all_jobs:  # record every live job with today's date (old ones get pruned later)
+        if j["id"] in retry:
+            continue  # description failed to load: check it again next round
         seen[j["id"]] = today
         seen[title_key(j)] = today
 

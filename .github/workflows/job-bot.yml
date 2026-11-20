@@ -38,20 +38,28 @@ jobs:
         run: |
           git config user.name "job-bot"
           git config user.email "job-bot@users.noreply.github.com"
+          STATE="$RUNNER_TEMP/state"
+          save_state() {
+            # Copy this run's state aside, reset to the latest main, merge, push.
+            # A merge (not a rebase) means another push can never wipe our seen jobs.
+            for i in 1 2 3 4 5; do
+              mkdir -p "$STATE"
+              cp seen.json digest.json health.json "$STATE"/ 2>/dev/null || true
+              [ -f adzuna.json ] && cp adzuna.json "$STATE"/
+              git fetch -q origin main && git reset -q --hard origin/main || { sleep 5; continue; }
+              python merge_state.py "$STATE"
+              git add seen.json digest.json health.json
+              [ -f adzuna.json ] && git add adzuna.json
+              git diff --cached --quiet && return 0
+              git commit -q -m "Update seen jobs" && git push -q && return 0
+              sleep $((5 * i))
+            done
+            echo "Could not push state after 5 tries; it will be merged on the next round."
+          }
           end=$((SECONDS + LOOP_MIN * 60))
           while true; do
-            git pull --rebase -q || true   # pick up config edits made while running
             python job_bot.py || echo "Run failed; trying again next round."
-            git add seen.json digest.json health.json
-            [ -f adzuna.json ] && git add adzuna.json
-            if ! git diff --cached --quiet; then
-              git commit -q -m "Update seen jobs"
-              for i in 1 2 3; do
-                git pull --rebase -X theirs -q && git push -q && break
-                git rebase --abort 2>/dev/null || true
-                sleep 5
-              done
-            fi
+            save_state   # also picks up config edits made while running
             [ $((SECONDS + INTERVAL_MIN * 60)) -ge $end ] && break
             sleep $((INTERVAL_MIN * 60))
           done
