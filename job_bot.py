@@ -124,12 +124,18 @@ LOCATION_EXCLUDE = re.compile(F["location_exclude"], re.I) if F.get("location_ex
 NO_SPONSOR = re.compile("|".join(F["no_sponsorship_phrases"]), re.I)
 DOMAIN = re.compile("|".join(F["domain_keywords"]), re.I)
 YEARS = re.compile(r"(\d{1,2})\s*\+?\s*(?:-|to|–)?\s*(?:\d{1,2})?\s*\+?\s*years", re.I)
+YEARS_EXP = re.compile(r"(\d{1,2})\s*\+?\s*(?:-|to|–)?\s*(?:\d{1,2})?\s*\+?\s*years?\b[^.;\n]{0,60}?\bexperience", re.I)
 PAY = re.compile(
     r"\$\s?\d{2,3}(?:,\d{3})+(?:\.\d{2})?(?:\s*(?:-|–|to)\s*\$?\s?\d{2,3}(?:,\d{3})+(?:\.\d{2})?)?"
 )
 
 
 def min_years(text):
+    # Prefer "N years ... experience" phrases and take the highest one,
+    # so "3+ yrs Python, 8+ years of experience" counts as 8.
+    nums = [int(n) for n in YEARS_EXP.findall(text) if 0 < int(n) <= 15]
+    if nums:
+        return max(nums)
     nums = [int(n) for n in YEARS.findall(text) if 0 < int(n) <= 15]
     return min(nums) if nums else None
 
