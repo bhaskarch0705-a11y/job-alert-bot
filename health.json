@@ -15,7 +15,8 @@
 "NVIDIA": 2,
 "Raymond James": 2,
 "State Street": 1,
-"The Hartford": 1
+"The Hartford": 1,
+"Thermo Fisher": 1
 },
 "empty": {},
 "errors": {
@@ -29,8 +30,8 @@
 },
 "lower": 1,
 "reposts": 0,
-"runs": 15,
+"runs": 16,
 "tier1": 17,
-"tier2": 13,
+"tier2": 14,
 "week": "2026-W47"
 }

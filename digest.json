@@ -91,6 +91,34 @@
 "Python"
 ],
 "why": "Fin/ops/revenue +20 (accounting, forecasting) | Tools +5 (Python) | Title +10 | Exp +10 (asks 5 yrs)"
+},
+{
+"id": "wd:thermofisher:R-01374892",
+"title": "Operations BI Analyst III",
+"url": "https://thermofisher.wd5.myworkdayjobs.com/ThermoFisherCareers/job/Hillsboro-Oregon-USA/Operations-BI-Analyst-III_R-01374892-1",
+"location": "Hillsboro, Oregon, USA",
+"age": 0,
+"pay": "",
+"company": "Thermo Fisher",
+"priority_company": false,
+"gem": false,
+"years": null,
+"mode": "On-site",
+"note": "",
+"h1b": "",
+"score": 75,
+"tier": 2,
+"domain": "second",
+"tools": [
+"AWS",
+"Azure",
+"Data modeling",
+"Excel",
+"Power BI",
+"Python",
+"SQL"
+],
+"why": "Fin/ops/revenue +20 (operations) | Tools +30 (AWS, Azure, Data modeling, Excel, Power BI, Python) | Title +20 | Exp +5 (not stated)"
 }
 ],
 "pending_low": [],
