@@ -31,6 +31,8 @@ jobs:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          ADZUNA_APP_ID: ${{ secrets.ADZUNA_APP_ID }}
+          ADZUNA_APP_KEY: ${{ secrets.ADZUNA_APP_KEY }}
           INTERVAL_MIN: "10"
           LOOP_MIN: "55"
         run: |
@@ -41,6 +43,7 @@ jobs:
             git pull --rebase -q || true   # pick up config edits made while running
             python job_bot.py || echo "Run failed; trying again next round."
             git add seen.json digest.json health.json
+            [ -f adzuna.json ] && git add adzuna.json
             if ! git diff --cached --quiet; then
               git commit -q -m "Update seen jobs"
               for i in 1 2 3; do
