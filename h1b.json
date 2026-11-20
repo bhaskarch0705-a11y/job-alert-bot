@@ -1,0 +1,780 @@
+{
+ "companies": {
+  "Abridge": {
+   "all_roles": 28,
+   "data_roles": 0
+  },
+  "Adyen": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Affirm": {
+   "all_roles": 85,
+   "data_roles": 27
+  },
+  "Airbnb": {
+   "all_roles": 195,
+   "data_roles": 48
+  },
+  "Airbyte": {
+   "all_roles": 9,
+   "data_roles": 0
+  },
+  "Airtable": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Aledade": {
+   "all_roles": 21,
+   "data_roles": 2
+  },
+  "Alloy": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Allstate": {
+   "all_roles": 48,
+   "data_roles": 6
+  },
+  "Amplitude": {
+   "all_roles": 27,
+   "data_roles": 3
+  },
+  "Angle Health": {
+   "all_roles": 1,
+   "data_roles": 0
+  },
+  "Artera": {
+   "all_roles": 2,
+   "data_roles": 0
+  },
+  "Asana": {
+   "all_roles": 54,
+   "data_roles": 8
+  },
+  "Astronomer": {
+   "all_roles": 2,
+   "data_roles": 0
+  },
+  "Atlan": {
+   "all_roles": 5,
+   "data_roles": 0
+  },
+  "Attentive": {
+   "all_roles": 31,
+   "data_roles": 10
+  },
+  "Bank of America": {
+   "all_roles": 556,
+   "data_roles": 136
+  },
+  "Bankjoy": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Bestow": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Betterment": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Blend": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Block": {
+   "all_roles": 121,
+   "data_roles": 31
+  },
+  "Blue Cross NC": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Brex": {
+   "all_roles": 22,
+   "data_roles": 2
+  },
+  "CVS Health / Aetna": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Calendly": {
+   "all_roles": 2,
+   "data_roles": 1
+  },
+  "Candid Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Capital One": {
+   "all_roles": 1744,
+   "data_roles": 810
+  },
+  "Cardinal Health": {
+   "all_roles": 168,
+   "data_roles": 19
+  },
+  "Carrot Fertility": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Carta": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Cedar": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Centene": {
+   "all_roles": 89,
+   "data_roles": 34
+  },
+  "Centivo": {
+   "all_roles": 3,
+   "data_roles": 0
+  },
+  "Chime": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Clarify Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Cloudflare": {
+   "all_roles": 141,
+   "data_roles": 23
+  },
+  "Clover Health": {
+   "all_roles": 1,
+   "data_roles": 0
+  },
+  "Coalition": {
+   "all_roles": 13,
+   "data_roles": 3
+  },
+  "Cohere Health": {
+   "all_roles": 21,
+   "data_roles": 5
+  },
+  "Coinbase": {
+   "all_roles": 138,
+   "data_roles": 15
+  },
+  "Collective Health": {
+   "all_roles": 1,
+   "data_roles": 0
+  },
+  "Collibra": {
+   "all_roles": 10,
+   "data_roles": 1
+  },
+  "Column": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Commure": {
+   "all_roles": 50,
+   "data_roles": 0
+  },
+  "Counterpart": {
+   "all_roles": 1,
+   "data_roles": 0
+  },
+  "Cowbell": {
+   "all_roles": 3,
+   "data_roles": 0
+  },
+  "Cribl": {
+   "all_roles": 11,
+   "data_roles": 1
+  },
+  "Cross River": {
+   "all_roles": 4,
+   "data_roles": 1
+  },
+  "Current": {
+   "all_roles": 4,
+   "data_roles": 3
+  },
+  "Databricks": {
+   "all_roles": 628,
+   "data_roles": 57
+  },
+  "Datadog": {
+   "all_roles": 79,
+   "data_roles": 6
+  },
+  "Dave": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Definitive Healthcare": {
+   "all_roles": 15,
+   "data_roles": 9
+  },
+  "Devoted Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "DoorDash": {
+   "all_roles": 556,
+   "data_roles": 85
+  },
+  "Dremio": {
+   "all_roles": 2,
+   "data_roles": 0
+  },
+  "Dropbox": {
+   "all_roles": 48,
+   "data_roles": 7
+  },
+  "Duolingo": {
+   "all_roles": 107,
+   "data_roles": 27
+  },
+  "EarnIn": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Elastic": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Elation Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Elevance Health": {
+   "all_roles": 453,
+   "data_roles": 99
+  },
+  "Equifax": {
+   "all_roles": 200,
+   "data_roles": 36
+  },
+  "Equip Health": {
+   "all_roles": 2,
+   "data_roles": 0
+  },
+  "Ethos": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Faire": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Federato": {
+   "all_roles": 9,
+   "data_roles": 0
+  },
+  "Fidelity": {
+   "all_roles": 2628,
+   "data_roles": 528
+  },
+  "Fifth Third Bank": {
+   "all_roles": 55,
+   "data_roles": 34
+  },
+  "Figma": {
+   "all_roles": 76,
+   "data_roles": 9
+  },
+  "Figure": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Fiserv": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Fivetran": {
+   "all_roles": 19,
+   "data_roles": 3
+  },
+  "Flatiron Health": {
+   "all_roles": 17,
+   "data_roles": 4
+  },
+  "Flexport": {
+   "all_roles": 30,
+   "data_roles": 3
+  },
+  "Garner Health": {
+   "all_roles": 5,
+   "data_roles": 3
+  },
+  "Gemini": {
+   "all_roles": 1,
+   "data_roles": 1
+  },
+  "GitLab": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Gravie": {
+   "all_roles": 2,
+   "data_roles": 1
+  },
+  "Gusto": {
+   "all_roles": 71,
+   "data_roles": 19
+  },
+  "H1": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Headway": {
+   "all_roles": 34,
+   "data_roles": 0
+  },
+  "Health Gorilla": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "HealthVerity": {
+   "all_roles": 24,
+   "data_roles": 14
+  },
+  "Healthie": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Hello Heart": {
+   "all_roles": 1,
+   "data_roles": 0
+  },
+  "Hex": {
+   "all_roles": 1,
+   "data_roles": 0
+  },
+  "Hightouch": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Hims & Hers": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Hippo": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Humana": {
+   "all_roles": 346,
+   "data_roles": 65
+  },
+  "Included Health": {
+   "all_roles": 17,
+   "data_roles": 0
+  },
+  "Infinitus": {
+   "all_roles": 7,
+   "data_roles": 2
+  },
+  "Inovalon": {
+   "all_roles": 36,
+   "data_roles": 5
+  },
+  "Instacart": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Insurify": {
+   "all_roles": 3,
+   "data_roles": 2
+  },
+  "Judi Health (Capital Rx)": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Justworks": {
+   "all_roles": 11,
+   "data_roles": 1
+  },
+  "Kettle": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Kin Insurance": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Klaviyo": {
+   "all_roles": 53,
+   "data_roles": 4
+  },
+  "Komodo Health": {
+   "all_roles": 12,
+   "data_roles": 6
+  },
+  "Labcorp": {
+   "all_roles": 22,
+   "data_roles": 1
+  },
+  "Ladder": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Lead Bank": {
+   "all_roles": 9,
+   "data_roles": 0
+  },
+  "Lemonade": {
+   "all_roles": 1,
+   "data_roles": 0
+  },
+  "Lyft": {
+   "all_roles": 102,
+   "data_roles": 35
+  },
+  "Lyra Health": {
+   "all_roles": 2,
+   "data_roles": 1
+  },
+  "Mastercard": {
+   "all_roles": 394,
+   "data_roles": 38
+  },
+  "Maven Clinic": {
+   "all_roles": 8,
+   "data_roles": 0
+  },
+  "McKesson": {
+   "all_roles": 106,
+   "data_roles": 38
+  },
+  "Medely": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Mercury": {
+   "all_roles": 59,
+   "data_roles": 14
+  },
+  "Mixpanel": {
+   "all_roles": 6,
+   "data_roles": 0
+  },
+  "Modern Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Modern Treasury": {
+   "all_roles": 6,
+   "data_roles": 0
+  },
+  "MongoDB": {
+   "all_roles": 113,
+   "data_roles": 20
+  },
+  "Monte Carlo": {
+   "all_roles": 1,
+   "data_roles": 1
+  },
+  "Nationwide": {
+   "all_roles": 66,
+   "data_roles": 10
+  },
+  "Navan": {
+   "all_roles": 41,
+   "data_roles": 6
+  },
+  "Nayya": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "NerdWallet": {
+   "all_roles": 5,
+   "data_roles": 2
+  },
+  "Nirvana Insurance": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Nomi Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Northern Trust": {
+   "all_roles": 47,
+   "data_roles": 7
+  },
+  "Notion": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Nova Credit": {
+   "all_roles": 8,
+   "data_roles": 3
+  },
+  "Nuna": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Omada Health": {
+   "all_roles": 8,
+   "data_roles": 3
+  },
+  "Openly": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Oportun": {
+   "all_roles": 18,
+   "data_roles": 6
+  },
+  "Oscar Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "PNC": {
+   "all_roles": 4,
+   "data_roles": 2
+  },
+  "Pagaya": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Palantir": {
+   "all_roles": 196,
+   "data_roles": 1
+  },
+  "Pathward": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "PayPal": {
+   "all_roles": 731,
+   "data_roles": 114
+  },
+  "Payoneer": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Peloton": {
+   "all_roles": 46,
+   "data_roles": 10
+  },
+  "Pie Insurance": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Pinterest": {
+   "all_roles": 267,
+   "data_roles": 35
+  },
+  "Plaid": {
+   "all_roles": 42,
+   "data_roles": 8
+  },
+  "Ramp": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Reddit": {
+   "all_roles": 90,
+   "data_roles": 3
+  },
+  "Redox": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Relay Payments": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Ro": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Robinhood": {
+   "all_roles": 202,
+   "data_roles": 29
+  },
+  "Rula": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Samsara": {
+   "all_roles": 66,
+   "data_roles": 12
+  },
+  "Scale AI": {
+   "all_roles": 93,
+   "data_roles": 4
+  },
+  "Sidecar Health": {
+   "all_roles": 3,
+   "data_roles": 2
+  },
+  "Sigma Computing": {
+   "all_roles": 35,
+   "data_roles": 2
+  },
+  "SmarterDx": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Snowflake": {
+   "all_roles": 519,
+   "data_roles": 41
+  },
+  "SoFi": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Socure": {
+   "all_roles": 13,
+   "data_roles": 4
+  },
+  "SonderMind": {
+   "all_roles": 1,
+   "data_roles": 0
+  },
+  "Spotify": {
+   "all_roles": 84,
+   "data_roles": 16
+  },
+  "Squarespace": {
+   "all_roles": 16,
+   "data_roles": 2
+  },
+  "Starburst": {
+   "all_roles": 6,
+   "data_roles": 0
+  },
+  "State Street": {
+   "all_roles": 367,
+   "data_roles": 25
+  },
+  "Steadily": {
+   "all_roles": 1,
+   "data_roles": 1
+  },
+  "Stripe": {
+   "all_roles": 306,
+   "data_roles": 30
+  },
+  "Strive Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Sure": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Sword Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Synctera": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Tala": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Talkspace": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Tebra": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Thatch": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Toast": {
+   "all_roles": 35,
+   "data_roles": 5
+  },
+  "TransUnion": {
+   "all_roles": 111,
+   "data_roles": 14
+  },
+  "Travelers": {
+   "all_roles": 52,
+   "data_roles": 33
+  },
+  "Treasury Prime": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Trend Health Partners": {
+   "all_roles": 1,
+   "data_roles": 1
+  },
+  "Twilio": {
+   "all_roles": 96,
+   "data_roles": 7
+  },
+  "USAA": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Unum": {
+   "all_roles": 21,
+   "data_roles": 3
+  },
+  "Upgrade": {
+   "all_roles": 28,
+   "data_roles": 8
+  },
+  "Upstart": {
+   "all_roles": 64,
+   "data_roles": 12
+  },
+  "Valon": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Vanta": {
+   "all_roles": 23,
+   "data_roles": 1
+  },
+  "Vida Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Wealthfront": {
+   "all_roles": 16,
+   "data_roles": 5
+  },
+  "Wellth": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Wheel": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Zest AI": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Zocdoc": {
+   "all_roles": 15,
+   "data_roles": 7
+  },
+  "Zus Health": {
+   "all_roles": 0,
+   "data_roles": 0
+  }
+ },
+ "files": [
+  "FY2026 Q4",
+  "FY2026 Q3",
+  "FY2026 Q2",
+  "FY2026 Q1"
+ ],
+ "period": "FY2026 Q1 to FY2026 Q4",
+ "updated": "2026-11-20"
+}
