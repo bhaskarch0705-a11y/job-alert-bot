@@ -43,7 +43,9 @@
 "Two95 International Inc.": 1,
 "UniqueHire Consulting LLC": 1
 },
-"empty": {},
+"empty": {
+"Adzuna (many employers)": 1
+},
 "errors": {
 "Abbott": 1,
 "Adobe": 1,
@@ -56,7 +58,7 @@
 },
 "lower": 17,
 "reposts": 0,
-"runs": 18,
+"runs": 19,
 "tier1": 19,
 "tier2": 24,
 "week": "2026-W47"
