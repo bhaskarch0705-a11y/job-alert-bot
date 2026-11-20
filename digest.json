@@ -1,48 +1,5 @@
 {
-"pending": [
-{
-"id": "wd:centene:1676184",
-"title": "Business Analyst III, Workforce Management",
-"url": "https://centene.wd5.myworkdayjobs.com/Centene_External/job/Remote-MO/Business-Analyst-III--Workforce-Management_1676184",
-"location": "Remote-MO",
-"age": 0,
-"pay": "$70,100.00 - $126,200.00",
-"company": "Centene",
-"priority_company": true,
-"gem": false,
-"years": 4,
-"mode": "Remote",
-"note": "",
-"h1b": "H-1B: 34 data-role filings, 89 total (FY2026 Q1 to FY2026 Q4)",
-"score": 75,
-"tier": 2,
-"domain": "core",
-"tools": [
-"Power BI"
-],
-"why": "Domain +40 (domain company) | Tools +5 (Power BI) | Title +20 | Exp +10 (asks 4 yrs)"
-},
-{
-"id": "wd:cvshealth:R1068048",
-"title": "Business Strategy & Operations Analyst",
-"url": "https://cvshealth.wd1.myworkdayjobs.com/CVS_Health_Careers/job/NY---New-York/Business-Strategy---Operations-Analyst_R1068048",
-"location": "NY - New York",
-"age": 0,
-"pay": "$66,330.00 - $145,860.00",
-"company": "CVS Health / Aetna",
-"priority_company": true,
-"gem": false,
-"years": 5,
-"mode": "On-site",
-"note": "",
-"h1b": "H-1B: 195 data-role filings, 562 total (FY2026 Q1 to FY2026 Q4)",
-"score": 60,
-"tier": 2,
-"domain": "core",
-"tools": [],
-"why": "Domain +40 (domain company) | Title +10 | Exp +10 (asks 5 yrs)"
-}
-],
+"pending": [],
 "pending_low": [],
-"last_slot": "2026-11-20-07"
+"last_slot": "2026-11-20-13"
 }
