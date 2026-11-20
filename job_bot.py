@@ -2,16 +2,19 @@
 """
 Job alert bot.
 
-Checks company career feeds (Greenhouse, Lever, Ashby, Workday) and emails you
-only NEW jobs that match your titles, skip too-senior roles, and do not say
-"no sponsorship". Jobs in your priority domains (banking, insurance,
-healthcare, fintech) that also match your skills are flagged PRIORITY and
-listed first.
+Checks company career feeds (Greenhouse, Lever, Ashby, Workday), keeps only
+fresh postings that fit your titles and experience and do not say "no
+sponsorship", gives each one a fit score out of 100, and sorts it into a tier:
+
+  Tier 1  your domain (banking, insurance, healthcare) + your tools: emailed right away
+  Tier 2  finance / operations / revenue / pricing work, or a strong tools match
+          in another domain: sent in a digest at the times set in config.json
+  Tier 3  weak fit: dropped
 
 Usage:
-  python job_bot.py              normal run (emails new matches)
+  python job_bot.py              normal run
   python job_bot.py --check      test every company feed, print job counts
-  python job_bot.py --dry-run    run filters on every job, print matches, send no email
+  python job_bot.py --dry-run    score every live job, print tiers, send no email
 """
 import html
 import json
@@ -25,12 +28,16 @@ from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
 from urllib.request import Request, urlopen
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).parent
 CONFIG = json.loads((ROOT / "config.json").read_text())
 SEEN_PATH = ROOT / "seen.json"
+DIGEST_PATH = ROOT / "digest.json"
 HEADERS = {"User-Agent": "Mozilla/5.0 (personal job alert bot)", "Accept": "application/json"}
 WORKERS = 12
+NOW = datetime.now(timezone.utc)
+LOCAL_TZ = ZoneInfo(CONFIG.get("timezone", "America/Chicago"))
 
 # ---------- fetching ----------
 
@@ -57,6 +64,30 @@ def ms_to_text(ms):
     return time.strftime("%Y-%m-%d %H:%M UTC", time.gmtime(ms / 1000))
 
 
+def iso_age(s):
+    """Days since an ISO timestamp, or None if it cannot be read."""
+    if not s:
+        return None
+    try:
+        dt = datetime.fromisoformat(str(s).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return (NOW - dt).total_seconds() / 86400
+
+
+def workday_age(s):
+    """Workday shows 'Posted Today', 'Posted Yesterday', 'Posted 3 Days Ago', 'Posted 30+ Days Ago'."""
+    s = (s or "").lower()
+    if "today" in s:
+        return 0
+    if "yesterday" in s:
+        return 1
+    m = re.search(r"(\d+)\+?\s*days?", s)
+    return int(m.group(1)) if m else None
+
+
 def from_greenhouse(c):
     slug = c["slug"]
     data = fetch_json(f"https://boards-api.greenhouse.io/v1/boards/{slug}/jobs?content=true")
@@ -66,7 +97,7 @@ def from_greenhouse(c):
             "title": j.get("title", ""),
             "url": j.get("absolute_url", ""),
             "location": (j.get("location") or {}).get("name", ""),
-            "posted": j.get("first_published") or j.get("updated_at", ""),
+            "age": iso_age(j.get("first_published") or j.get("updated_at")),
             "text": strip_html(j.get("content", "")),
             "pay": "",
         }
@@ -84,12 +115,13 @@ def from_lever(c):
         sr = j.get("salaryRange")
         if sr and sr.get("min"):
             pay = f"${sr['min']:,} - ${sr.get('max', sr['min']):,}"
+        created = j.get("createdAt")
         yield {
             "id": f"lv:{slug}:{j['id']}",
             "title": j.get("text", ""),
             "url": j.get("hostedUrl", ""),
             "location": (j.get("categories") or {}).get("location", ""),
-            "posted": ms_to_text(j.get("createdAt")),
+            "age": (time.time() * 1000 - created) / 86400000 if created else None,
             "text": " ".join(p for p in parts if p),
             "pay": pay,
         }
@@ -107,7 +139,7 @@ def from_ashby(c):
             "title": j.get("title", ""),
             "url": j.get("jobUrl", ""),
             "location": j.get("location", ""),
-            "posted": j.get("publishedAt", ""),
+            "age": iso_age(j.get("publishedAt")),
             "text": j.get("descriptionPlain") or strip_html(j.get("descriptionHtml", "")),
             "pay": comp,
         }
@@ -115,7 +147,7 @@ def from_ashby(c):
 
 def from_workday(c):
     """Workday career sites. Searches a few role keywords, then loads the full
-    description later, only for jobs whose title and location already pass."""
+    description later, only for jobs that already pass the cheap checks."""
     host, tenant, site = c["host"], c["tenant"], c["site"]
     base = f"https://{host}/wday/cxs/{tenant}/{site}"
     terms = CONFIG.get("workday_search_terms", ["data analyst", "data engineer"])
@@ -140,7 +172,7 @@ def from_workday(c):
             "title": p.get("title", ""),
             "url": f"https://{host}/{site}{path}",
             "location": p.get("locationsText", ""),
-            "posted": p.get("postedOn", ""),
+            "age": workday_age(p.get("postedOn")),
             "text": "",
             "pay": "",
             "detail_url": f"{base}{path}",
@@ -178,21 +210,34 @@ def load_detail(job):
     except Exception:
         job["text"] = ""
 
-# ---------- filtering ----------
+# ---------- filtering and scoring ----------
 
 F = CONFIG["filters"]
+S = CONFIG["scoring"]
 TITLE_INCLUDE = re.compile(F["title_include"], re.I)
 TITLE_EXCLUDE = re.compile(F["title_exclude"], re.I)
 LOCATION_EXCLUDE = re.compile(F["location_exclude"], re.I) if F.get("location_exclude") else None
 NO_SPONSOR = re.compile("|".join(F["no_sponsorship_phrases"]), re.I)
-DOMAIN = re.compile("|".join(F["domain_keywords"]), re.I)
-SKILLS = re.compile(r"\b(?:" + "|".join(F["skill_keywords"]) + r")\b", re.I)
-MIN_SKILLS = int(F.get("priority_min_skills", 2))
+MAX_AGE = float(F.get("max_age_days", 2))
 YEARS = re.compile(r"(\d{1,2})\s*\+?\s*(?:-|to|–)?\s*(?:\d{1,2})?\s*\+?\s*years", re.I)
 YEARS_EXP = re.compile(r"(\d{1,2})\s*\+?\s*(?:-|to|–)?\s*(?:\d{1,2})?\s*\+?\s*years?\b[^.;\n]{0,60}?\bexperience", re.I)
 PAY = re.compile(
     r"\$\s?\d{2,3}(?:,\d{3})+(?:\.\d{2})?(?:\s*(?:-|–|to)\s*\$?\s?\d{2,3}(?:,\d{3})+(?:\.\d{2})?)?"
 )
+
+
+def kw_regex(words):
+    return re.compile(r"\b(?:" + "|".join(words) + r")\b", re.I)
+
+
+CORE_DOMAIN = kw_regex(S["core_domain_keywords"])
+CORE_TITLE = kw_regex(S["core_title_only_keywords"])
+SECOND_DOMAIN = kw_regex(S["second_domain_keywords"])
+SECOND_TITLE = kw_regex(S["second_title_only_keywords"])
+TOOLS = kw_regex(S["tools"])
+TITLE_CORE = re.compile(S["title_core"], re.I)
+TOOL_NAMES = {"powerbi": "Power BI", "pyspark": "Spark", "elt": "ETL", "datamodeling": "Data modeling",
+              "datamodelling": "Data modeling", "bigquery": "BigQuery", "dbt": "dbt"}
 
 
 def min_years(text):
@@ -205,18 +250,71 @@ def min_years(text):
     return min(nums) if nums else None
 
 
-def norm_skill(s):
-    s = s.lower().replace(" ", "")
-    return {"powerbi": "Power BI", "pyspark": "Spark", "datamodeling": "data modeling",
-            "datamodelling": "data modeling"}.get(s, s.upper() if len(s) <= 4 else s.title())
+def tool_name(s):
+    k = s.lower().replace(" ", "")
+    return TOOL_NAMES.get(k, k.upper() if len(k) <= 4 else k.title())
+
+
+def distinct(regex, text):
+    return sorted({m.group(0).lower() for m in regex.finditer(text)})
+
+
+def score_job(job):
+    """Fill job['score'], job['tier'] and job['why'] (a short explanation)."""
+    title, text = job["title"], job["text"]
+    why = []
+
+    # Words like "insurance" or "healthcare" show up in almost every benefits section,
+    # so they only count in the title; the job text needs 2+ specific domain terms.
+    core_title = distinct(CORE_DOMAIN, title) or distinct(CORE_TITLE, title)
+    core_text = distinct(CORE_DOMAIN, text)
+    second_text = distinct(SECOND_DOMAIN, text)
+    second = (distinct(SECOND_DOMAIN, title) or distinct(SECOND_TITLE, title)
+              or (second_text if len(second_text) >= 2 else []))
+    if job["priority_company"] or core_title or len(core_text) >= 2:
+        domain, dpts = "core", S["points"]["core_domain"]
+        label = "domain company" if job["priority_company"] else ", ".join((core_title or core_text)[:3])
+        why.append(f"Domain +{dpts} ({label})")
+    elif second:
+        domain, dpts = "second", S["points"]["second_domain"]
+        why.append(f"Fin/ops/revenue +{dpts} ({', '.join(second[:3])})")
+    else:
+        domain, dpts = "other", 0
+
+    tools = sorted({tool_name(t) for t in distinct(TOOLS, title + " " + text)})
+    tpts = min(len(tools) * S["points"]["per_tool"], S["points"]["tools_max"])
+    if tools:
+        why.append(f"Tools +{tpts} ({', '.join(tools[:6])})")
+
+    tl = S["points"]["title_core"] if TITLE_CORE.search(title) else S["points"]["title_other"]
+    why.append(f"Title +{tl}")
+
+    yrs = job.get("years")
+    if yrs is None:
+        epts = S["points"]["exp_unstated"]
+        why.append(f"Exp +{epts} (not stated)")
+    else:
+        epts = S["points"]["exp_fit"]
+        why.append(f"Exp +{epts} (asks {yrs} yrs)")
+
+    score = dpts + tpts + tl + epts
+    if domain == "core" and tpts >= S["tier1_min_tool_points"] and score >= S["tier1_min_score"]:
+        tier = 1
+    elif score >= S["tier2_min_score"]:
+        tier = 2
+    else:
+        tier = 3
+    job.update(score=score, tier=tier, domain=domain, tools=tools, why=" | ".join(why))
 
 
 def check_job(job):
-    """Return (keep: bool, reason: str)."""
+    """Return (keep: bool, reason: str). Cheap checks first, description last."""
     if not TITLE_INCLUDE.search(job["title"]):
         return False, "title"
     if TITLE_EXCLUDE.search(job["title"]):
         return False, "seniority"
+    if job.get("age") is not None and job["age"] > MAX_AGE:
+        return False, "old posting"
     if LOCATION_EXCLUDE and LOCATION_EXCLUDE.search(job["location"] or ""):
         return False, "location"
     load_detail(job)
@@ -232,14 +330,12 @@ def check_job(job):
     if not job["pay"]:
         p = PAY.search(job["text"])
         job["pay"] = p.group(0) if p else ""
-    blob = job["title"] + " " + job["text"]
-    job["domain_hit"] = sorted({d.group(0).lower() for d in DOMAIN.finditer(job["text"])})[:4]
-    job["skills"] = sorted({norm_skill(s.group(0)) for s in SKILLS.finditer(blob)})
-    in_domain = job["priority_company"] or bool(job["domain_hit"])
-    job["priority"] = in_domain and len(job["skills"]) >= MIN_SKILLS
+    score_job(job)
+    if job["tier"] == 3:
+        return False, f"low fit ({job['score']})"
     return True, "ok"
 
-# ---------- seen-jobs memory ----------
+# ---------- state ----------
 
 def load_seen():
     if SEEN_PATH.exists():
@@ -248,48 +344,60 @@ def load_seen():
 
 
 def save_seen(seen):
-    cutoff = (datetime.now(timezone.utc) - timedelta(days=120)).date().isoformat()
+    cutoff = (NOW - timedelta(days=120)).date().isoformat()
     seen = {k: v for k, v in seen.items() if v >= cutoff}
     SEEN_PATH.write_text(json.dumps(seen, indent=0, sort_keys=True))
 
+
+def load_digest():
+    if DIGEST_PATH.exists():
+        return json.loads(DIGEST_PATH.read_text())
+    return {"pending": [], "last_slot": ""}
+
+
+def save_digest(d):
+    DIGEST_PATH.write_text(json.dumps(d, indent=0))
+
+
+def current_slot():
+    """Latest digest time (local) that has already passed, as 'YYYY-MM-DD-HH'."""
+    local = NOW.astimezone(LOCAL_TZ)
+    hours = sorted(int(h) for h in CONFIG.get("digest_hours_local", [8, 16]))
+    past = [h for h in hours if h <= local.hour]
+    if past:
+        return f"{local.date().isoformat()}-{past[-1]:02d}"
+    return f"{(local.date() - timedelta(days=1)).isoformat()}-{hours[-1]:02d}"
+
 # ---------- email ----------
 
+def age_text(a):
+    if a is None:
+        return ""
+    return "within 24h" if a < 1 else f"{int(a)} day(s) ago"
+
+
 def job_html(j):
-    tag = "<span style='color:#b00020'><b>PRIORITY</b></span> " if j.get("priority") else ""
-    bits = [f"{tag}<b><a href='{html.escape(j['url'])}'>{html.escape(j['title'])}</a></b>",
-            f"{html.escape(j['company'])} | {html.escape(j['location'] or 'Location not listed')}"]
-    extra = []
-    if j.get("pay"):
-        extra.append(f"Pay: {html.escape(j['pay'])}")
-    if j.get("years") is not None:
-        extra.append(f"Asks {j['years']}+ yrs")
-    if j.get("skills"):
-        extra.append("Skills: " + html.escape(", ".join(j["skills"][:8])))
-    if j.get("domain_hit"):
-        extra.append("Domain: " + ", ".join(j["domain_hit"]))
-    if j.get("posted"):
-        extra.append(f"Posted: {html.escape(str(j['posted']))}")
-    if extra:
-        bits.append(" | ".join(extra))
+    color = "#b00020" if j["tier"] == 1 else "#555"
+    bits = [f"<span style='color:{color}'><b>[{j['score']}]</b></span> "
+            f"<b><a href='{html.escape(j['url'])}'>{html.escape(j['title'])}</a></b>",
+            f"{html.escape(j['company'])} | {html.escape(j['location'] or 'Location not listed')}"
+            + (f" | Posted {age_text(j.get('age'))}" if j.get("age") is not None else "")
+            + (f" | Pay: {html.escape(j['pay'])}" if j.get("pay") else ""),
+            f"<span style='color:#777'>{html.escape(j['why'])}</span>"]
     return "<p>" + "<br>".join(bits) + "</p>"
 
 
-def send_email(subject, jobs, intro):
+def send_email(subject, jobs, intro, extra_note=""):
     user = os.environ["EMAIL_USER"]
     pwd = os.environ["EMAIL_APP_PASSWORD"]
     to = os.environ.get("EMAIL_TO", user)
-    pri = sorted([j for j in jobs if j.get("priority")],
-                 key=lambda j: (-len(j.get("skills", [])), j["company"]))
-    rest = sorted([j for j in jobs if not j.get("priority")],
-                  key=lambda j: (not (j["priority_company"] or j.get("domain_hit")), j["company"]))
-    body = f"<p>{intro}</p>"
-    if pri:
-        body += (f"<h3 style='color:#b00020'>Priority matches ({len(pri)}): your domain "
-                 f"and your skills</h3>") + "".join(job_html(j) for j in pri)
-    if rest:
-        body += f"<h3>Other matching roles ({len(rest)})</h3>" + "".join(job_html(j) for j in rest)
-    body += ("<p style='color:#777'>The bot skipped postings that say no sponsorship. "
-             "Still confirm sponsorship with the recruiter.</p>")
+    body = f"<p>{intro}</p>" + "".join(job_html(j) for j in jobs)
+    if extra_note:
+        body += f"<p><i>{extra_note}</i></p>"
+    body += ("<p style='color:#777'>Score = domain (40 core, 20 finance/ops/revenue/pricing) + "
+             "tools (5 each, max 30) + title (20 core, 10 other) + experience fit (10, or 5 if "
+             "not stated). Postings saying no sponsorship were skipped; still confirm with the "
+             "recruiter.</p>")
     msg = EmailMessage()
     msg["Subject"] = subject
     msg["From"] = user
@@ -301,21 +409,25 @@ def send_email(subject, jobs, intro):
         s.send_message(msg)
 
 
-def subject_for(jobs, first_run, n_companies):
-    pri = [j for j in jobs if j.get("priority")]
-    if first_run:
-        return (f"Job bot is live: tracking {n_companies} companies, "
-                f"{len(jobs)} roles open now ({len(pri)} priority)")
-    names = ", ".join(sorted({j["company"] for j in (pri or jobs)}))[:110]
-    if pri:
-        return f"PRIORITY: {len(pri)} domain match(es) + {len(jobs) - len(pri)} more new | {names}"
-    return f"{len(jobs)} new data role(s): {names}"
+def slim(jobs):
+    """Drop the long description before saving jobs that wait for the digest."""
+    return [{k: v for k, v in j.items() if k not in ("text", "detail_url")} for j in jobs]
+
+
+def top(jobs, n):
+    jobs = sorted(jobs, key=lambda j: (-j["score"], j["company"]))
+    return jobs[:n], jobs[n:]
+
+
+def short_names(jobs):
+    return ", ".join(dict.fromkeys(j["company"] for j in jobs))[:100]
 
 # ---------- main ----------
 
 def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else ""
     companies = CONFIG["companies"]
+    cap = int(CONFIG.get("max_jobs_per_email", 15))
     all_jobs, errors = [], []
 
     def grab(c):
@@ -339,10 +451,8 @@ def main():
     if mode == "--check":
         return
 
-    seen = load_seen()
-    first_run = seen is None
-    seen = seen or {}
-    if first_run or mode == "--dry-run":
+    seen = load_seen() or {}
+    if mode == "--dry-run":
         to_check = all_jobs
     else:
         to_check = [j for j in all_jobs if j["id"] not in seen]
@@ -350,32 +460,49 @@ def main():
     with ThreadPoolExecutor(WORKERS) as pool:
         verdicts = list(pool.map(check_job, to_check))
     matches = [j for j, (keep, _) in zip(to_check, verdicts) if keep]
-    n_pri = sum(1 for j in matches if j.get("priority"))
+    t1 = [j for j in matches if j["tier"] == 1]
+    t2 = [j for j in matches if j["tier"] == 2]
+    dropped = sum(1 for _, why in verdicts if why.startswith("low fit"))
 
     print(f"Fetched {len(all_jobs)} jobs from {len(companies) - len(errors)} companies; "
-          f"checked {len(to_check)} unseen; {len(matches)} match ({n_pri} priority).")
+          f"checked {len(to_check)} unseen; tier 1: {len(t1)}, tier 2: {len(t2)}, "
+          f"dropped as low fit: {dropped}.")
     for e in errors:
         print("Feed error:", e)
 
     if mode == "--dry-run":
-        for j in sorted(matches, key=lambda j: not j.get("priority")):
-            flag = "PRIORITY " if j.get("priority") else ""
-            print(f"- {flag}{j['title']} | {j['company']} | {j['location']} | "
-                  f"{', '.join(j.get('skills', []))} | {j['url']}")
+        for j in sorted(matches, key=lambda j: -j["score"]):
+            print(f"- T{j['tier']} [{j['score']}] {j['title']} | {j['company']} | "
+                  f"{j['location']} | {j['why']} | {j['url']}")
         return
 
-    today = datetime.now(timezone.utc).date().isoformat()
+    today = NOW.date().isoformat()
     for j in all_jobs:  # record every live job with today's date (old ones get pruned later)
         seen[j["id"]] = today
 
-    if matches:
-        intro = ("Here is your baseline of roles already open. From now on you will only get "
-                 "emails for brand new postings." if first_run
-                 else "New postings found in the last check:")
-        send_email(subject_for(matches, first_run, len(companies)), matches, intro)
-        print(f"Emailed {len(matches)} job(s), {n_pri} priority.")
-    else:
-        print("No new matching jobs.")
+    digest = load_digest()
+    if t1:
+        send_now, overflow = top(t1, cap)
+        send_email(f"PRIORITY {len(t1)} new | top: {send_now[0]['company']} "
+                   f"[{send_now[0]['score']}] | {short_names(send_now)}",
+                   send_now, "New Tier 1 postings (your domain and your tools), best fit first:")
+        digest["pending"].extend(slim(overflow))
+        print(f"Emailed {len(send_now)} tier 1 job(s); {len(overflow)} overflow to digest.")
+    digest["pending"].extend(slim(t2))
+
+    slot = current_slot()
+    if not digest.get("last_slot"):
+        digest["last_slot"] = slot  # first run: start the digest clock without sending
+    elif digest["pending"] and digest["last_slot"] != slot:
+        send_now, rest = top(digest["pending"], cap)
+        note = f"+{len(rest)} lower-scored role(s) not shown." if rest else ""
+        send_email(f"Digest: {len(digest['pending'])} more data role(s) | {short_names(send_now)}",
+                   send_now,
+                   "Tier 2 since the last digest (finance, operations, revenue or pricing "
+                   "roles, and strong tool matches in other domains), best fit first:", note)
+        print(f"Sent digest with {len(send_now)} job(s).")
+        digest = {"pending": [], "last_slot": slot}
+    save_digest(digest)
     save_seen(seen)
 
 
