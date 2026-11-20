@@ -19,15 +19,19 @@ Usage:
 import html
 import json
 import os
+import random
+import threading
 import re
 import smtplib
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import nullcontext
 from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
 from urllib.parse import quote
+from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
@@ -40,6 +44,7 @@ H1B_PATH = ROOT / "h1b.json"
 H1B = json.loads(H1B_PATH.read_text()) if H1B_PATH.exists() else {}
 HEADERS = {"User-Agent": "Mozilla/5.0 (personal job alert bot)", "Accept": "application/json"}
 WORKERS = 12
+WORKDAY_GATE = threading.BoundedSemaphore(4)
 NOW = datetime.now(timezone.utc)
 LOCAL_TZ = ZoneInfo(CONFIG.get("timezone", "America/Chicago"))
 
@@ -52,8 +57,18 @@ def fetch_json(url, payload=None):
         data = json.dumps(payload).encode("utf-8")
         headers["Content-Type"] = "application/json"
     req = Request(url, data=data, headers=headers)
-    with urlopen(req, timeout=30) as r:
-        return json.loads(r.read().decode("utf-8"))
+    # Workday rate-limits (HTTP 429) when many tenants on one cluster are hit at once,
+    # so Workday calls share a small pool and any 429/5xx is retried with backoff.
+    gate = WORKDAY_GATE if "myworkdayjobs.com" in url else nullcontext()
+    for attempt in range(5):
+        try:
+            with gate:
+                with urlopen(req, timeout=30) as r:
+                    return json.loads(r.read().decode("utf-8"))
+        except HTTPError as e:
+            if e.code not in (429, 500, 502, 503, 504) or attempt == 4:
+                raise
+        time.sleep(3 * 2 ** attempt + random.random() * 3)
 
 
 def strip_html(s):
