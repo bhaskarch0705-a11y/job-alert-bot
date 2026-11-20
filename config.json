@@ -1,6 +1,6 @@
 {
  "filters": {
-  "title_include": "data engineer|data engineering|data analyst|business analyst|business data analyst|business systems analyst|business process analyst|operations (data )?analyst|marketing (data )?analyst|data quality analyst|quality and reporting analyst|reporting analyst|sql analyst|sql developer|analytics engineer|data analytics engineer|business intelligence|\\bBI (engineer|analyst|developer)\\b|power ?bi developer|tableau developer|\\banalyst\\b[^|]{0,25}\\bdata\\b|\\bdata\\b[^|]{0,25}\\banalyst\\b|\\bengineer\\b[^|]{0,25}\\bdata\\b",
+  "title_include": "data engineer|data engineering|data analyst|business analyst|business data analyst|business systems analyst|business process analyst|operations (data )?analyst|marketing (data )?analyst|media analyst|data quality analyst|quality and reporting analyst|reporting analyst|sql analyst|sql developer|analytics engineer|data analytics engineer|business intelligence|\\bBI (engineer|analyst|developer)\\b|power ?bi developer|tableau developer|\\banalyst\\b[^|]{0,25}\\bdata\\b|\\bdata\\b[^|]{0,25}\\banalyst\\b|\\bengineer\\b[^|]{0,25}\\bdata\\b",
   "title_exclude": "\\b(staff|principal|lead|manager|director|head|vp|vice president|architect|intern|internship|scientist)\\b|\\bIV\\b",
   "max_min_years": 6,
   "location_exclude": "\\b(india|bangalore|bengaluru|hyderabad|pune|chennai|gurgaon|gurugram|noida|mumbai|canada|toronto|vancouver|montreal|london|united kingdom|\\bUK\\b|ireland|dublin|germany|berlin|poland|warsaw|krakow|mexico|brazil|philippines|manila|israel|tel aviv|australia|sydney|singapore|costa rica|argentina|colombia|spain|portugal|netherlands|amsterdam|france|paris|japan|china|hong kong)\\b",
@@ -15,32 +15,89 @@
    "(active |current )?(secret|top secret|ts/sci) (security )?clearance (is )?required",
    "not (currently )?sponsoring"
   ],
-  "domain_keywords": [
-   "health ?care",
-   "healthcare",
+  "max_age_days": 2
+ },
+ "scoring": {
+  "core_domain_keywords": [
    "claims",
-   "payer",
+   "payers?",
    "medicaid",
    "medicare",
    "hedis",
    "hl7",
    "fhir",
    "epic",
+   "ehr",
+   "emr",
    "pharmacy",
    "clinical",
-   "insurance",
+   "provider data",
+   "member data",
+   "health plans?",
    "underwriting",
    "actuarial",
-   "policy ?holder",
-   "bank",
+   "policyholders?",
+   "reinsurance",
+   "property and casualty",
+   "p&c",
    "banking",
    "financial services",
    "fintech",
    "lending",
+   "mortgage",
+   "credit risk",
+   "credit cards?",
    "payments",
+   "fraud",
+   "aml",
+   "kyc",
+   "deposits",
+   "wealth management"
+  ],
+  "core_title_only_keywords": [
+   "insurance",
+   "healthcare",
+   "health care",
+   "health",
+   "bank",
+   "banking",
+   "clinical",
+   "claims",
+   "payments",
+   "risk",
    "credit"
   ],
-  "skill_keywords": [
+  "second_domain_keywords": [
+   "revenue",
+   "pricing",
+   "billing",
+   "fp&a",
+   "financial planning",
+   "forecasting",
+   "budgeting",
+   "accounting",
+   "financial operations",
+   "finance operations",
+   "revenue operations",
+   "sales operations",
+   "operations analytics",
+   "supply chain",
+   "procurement",
+   "order to cash",
+   "accounts receivable",
+   "accounts payable",
+   "general ledger",
+   "profitability"
+  ],
+  "second_title_only_keywords": [
+   "operations",
+   "finance",
+   "financial",
+   "revenue",
+   "pricing",
+   "billing"
+  ],
+  "tools": [
    "sql",
    "python",
    "excel",
@@ -60,10 +117,30 @@
    "elt",
    "looker",
    "redshift",
+   "kafka",
    "data modell?ing"
   ],
-  "priority_min_skills": 2
+  "title_core": "data engineer|data analyst|business intelligence|\\bBI (engineer|analyst|developer)\\b|power ?bi|business analyst|business data analyst|business process analyst|media analyst|reporting|data quality|sql analyst|analytics engineer|tableau developer",
+  "points": {
+   "core_domain": 40,
+   "second_domain": 20,
+   "per_tool": 5,
+   "tools_max": 30,
+   "title_core": 20,
+   "title_other": 10,
+   "exp_fit": 10,
+   "exp_unstated": 5
+  },
+  "tier1_min_score": 70,
+  "tier1_min_tool_points": 10,
+  "tier2_min_score": 45
  },
+ "timezone": "America/Chicago",
+ "digest_hours_local": [
+  8,
+  16
+ ],
+ "max_jobs_per_email": 15,
  "workday_search_terms": [
   "data engineer",
   "data analyst",
