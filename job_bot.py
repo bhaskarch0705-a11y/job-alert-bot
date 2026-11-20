@@ -2,7 +2,7 @@
 """
 Job alert bot.
 
-Checks company career feeds (Greenhouse, Lever, Ashby, Workday), keeps only
+Checks company career feeds (Greenhouse, Lever, Ashby, Workday, Oracle), keeps only
 fresh postings that fit your titles and experience and do not say "no
 sponsorship", gives each one a fit score out of 100, and sorts it into a tier:
 
@@ -27,6 +27,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
+from urllib.parse import quote
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
@@ -182,7 +183,45 @@ def from_workday(c):
         }
 
 
+def from_oracle(c):
+    """Oracle Recruiting Cloud career sites (JPMorgan Chase and others). Results come
+    newest first, so paging stops once postings get older than max_age_days."""
+    host, site = c["host"], c["site"]
+    base = f"https://{host}/hcmRestApi/resources/latest/recruitingCEJobRequisitions"
+    terms = CONFIG.get("oracle_search_terms") or CONFIG.get("workday_search_terms", ["data analyst"])
+    pages = int(CONFIG.get("oracle_pages_per_term", 4))
+    max_age = float(CONFIG["filters"].get("max_age_days", 2))
+    found = {}
+    for term in terms:
+        for page in range(pages):
+            url = (f"{base}?onlyData=true&expand=requisitionList.secondaryLocations"
+                   f"&finder=findReqs;siteNumber={site},limit=25,offset={page * 25},"
+                   f"keyword={quote(chr(34) + term + chr(34))},sortBy=POSTING_DATES_DESC")
+            items = fetch_json(url).get("items") or [{}]
+            reqs = items[0].get("requisitionList") or []
+            for r in reqs:
+                found.setdefault(r["Id"], r)
+            ages = [iso_age(r.get("PostedDate")) for r in reqs]
+            if len(reqs) < 25 or all(a is not None and a > max_age for a in ages):
+                break
+    for rid, r in found.items():
+        if r.get("PrimaryLocationCountry") not in (None, "", "US"):
+            continue
+        text = " ".join(strip_html(r.get(k) or "") for k in
+                        ("ShortDescriptionStr", "ExternalResponsibilitiesStr", "ExternalQualificationsStr"))
+        yield {
+            "id": f"or:{host.split('.')[0]}:{rid}",
+            "title": r.get("Title", ""),
+            "url": f"https://{host}/hcmUI/CandidateExperience/en/sites/{site}/job/{rid}",
+            "location": r.get("PrimaryLocation", "") + (" (" + str(r["WorkplaceType"]) + ")" if r.get("WorkplaceType") else ""),
+            "age": iso_age(r.get("PostedDate")),
+            "text": text,
+            "pay": "",
+        }
+
+
 SOURCES = {
+    "oracle": from_oracle,
     "greenhouse": from_greenhouse,
     "lever": from_lever,
     "ashby": from_ashby,
@@ -515,8 +554,17 @@ def slim(jobs):
 
 
 def top(jobs, n):
-    jobs = sorted(jobs, key=lambda j: (-j["score"], j["company"]))
-    return jobs[:n], jobs[n:]
+    """Best n jobs, at most max_per_company_per_email from any one company, so one big
+    employer (CVS, Centene...) cannot fill the whole email. The rest is returned."""
+    per = int(CONFIG.get("max_per_company_per_email", 4))
+    picked, rest, count = [], [], {}
+    for j in sorted(jobs, key=lambda j: (-j["score"], j["company"])):
+        if len(picked) < n and count.get(j["company"], 0) < per:
+            picked.append(j)
+            count[j["company"]] = count.get(j["company"], 0) + 1
+        else:
+            rest.append(j)
+    return picked, rest
 
 
 def short_names(jobs):
@@ -665,14 +713,14 @@ def main():
     elif (digest["pending"] or digest["pending_low"]) and digest["last_slot"] != slot:
         send_now, rest = top(digest["pending"], cap)
         low_now, low_rest = top(digest["pending_low"], int(CONFIG.get("max_lower_fit_per_digest", 10)))
-        note = f"+{len(rest)} lower-scored role(s) not shown." if rest else ""
+        note = f"+{len(rest)} more role(s) held for the next digest." if rest else ""
         send_email(f"Digest: {len(digest['pending'])} role(s) + {len(digest['pending_low'])} lower fit"
                    f" | {short_names(send_now or low_now)}",
                    send_now,
                    "Tier 2 since the last digest (finance, operations, revenue or pricing "
                    "roles, and strong tool matches in other domains), best fit first:", note, low_now)
         print(f"Sent digest with {len(send_now)} job(s) + {len(low_now)} lower fit.")
-        digest = {"pending": [], "pending_low": [], "last_slot": slot}
+        digest = {"pending": rest[:int(CONFIG.get("digest_carryover", 40))], "pending_low": [], "last_slot": slot}
     save_digest(digest)
     save_seen(seen)
 
