@@ -1,0 +1,56 @@
+{
+  "filters": {
+    "title_include": "data engineer|data analyst|analytics engineer|business intelligence|\\bBI (engineer|analyst|developer)\\b|power bi developer|data analytics engineer|reporting analyst",
+    "title_exclude": "\\b(senior|sr\\.?|staff|principal|lead|manager|director|head|vp|vice president|architect|intern|internship)\\b|\\bIII\\b|\\bIV\\b",
+    "max_min_years": 5,
+    "location_exclude": "\\b(india|canada|toronto|vancouver|london|united kingdom|\\bUK\\b|germany|poland|mexico|brazil|philippines|israel|tel aviv|ireland|australia|singapore)\\b",
+    "no_sponsorship_phrases": [
+      "(will not|won't|cannot|can't|do not|does not|don't|unable to|not able to|is not able to|are not able to)\\s+(offer|provide|support|consider)?\\s*(visa |employment |immigration |h-?1b )?sponsor",
+      "no (visa |employment |immigration |h-?1b )?sponsorship",
+      "sponsorship (is |will )?not (be )?(available|offered|provided|supported)",
+      "not (open|eligible) (to|for) (visa |employment )?sponsorship",
+      "without (the )?(need for )?(current or future |now or in the future )?(visa |employer |employment |company )?sponsorship",
+      "must be (a )?(u\\.?s\\.? citizen|united states citizen|green card holder)",
+      "u\\.?s\\.? citizenship (is )?required",
+      "(active |current )?(secret|top secret|ts/sci) (security )?clearance (is )?required",
+      "not (currently )?sponsoring"
+    ],
+    "domain_keywords": [
+      "health ?care", "healthcare", "claims", "payer", "medicaid", "medicare", "hedis", "hl7", "fhir", "epic",
+      "pharmacy", "clinical", "insurance", "underwriting", "actuarial", "policy ?holder",
+      "bank", "banking", "financial services", "fintech", "lending", "payments", "credit"
+    ]
+  },
+  "companies": [
+    {"name": "Definitive Healthcare", "ats": "greenhouse", "slug": "definitivehc"},
+    {"name": "Judi Health (Capital Rx)", "ats": "greenhouse", "slug": "judihealth"},
+    {"name": "Pie Insurance", "ats": "greenhouse", "slug": "pieinsurance"},
+    {"name": "SmarterDx", "ats": "greenhouse", "slug": "smarterdx"},
+    {"name": "Hello Heart", "ats": "greenhouse", "slug": "helloheart"},
+    {"name": "Garner Health", "ats": "greenhouse", "slug": "garnerhealth"},
+    {"name": "Tebra", "ats": "greenhouse", "slug": "tebra"},
+    {"name": "Trend Health Partners", "ats": "lever", "slug": "Trend-Health-Partners"},
+    {"name": "Oscar Health", "ats": "greenhouse", "slug": "oscar"},
+    {"name": "Devoted Health", "ats": "greenhouse", "slug": "devoted"},
+    {"name": "Cedar", "ats": "greenhouse", "slug": "cedar"},
+    {"name": "Komodo Health", "ats": "greenhouse", "slug": "komodohealth"},
+    {"name": "Flatiron Health", "ats": "greenhouse", "slug": "flatironhealth"},
+    {"name": "Zocdoc", "ats": "greenhouse", "slug": "zocdoc"},
+    {"name": "Headway", "ats": "greenhouse", "slug": "headway"},
+    {"name": "Spring Health", "ats": "greenhouse", "slug": "springhealth66"},
+    {"name": "Lemonade", "ats": "greenhouse", "slug": "lemonade"},
+    {"name": "Root Insurance", "ats": "greenhouse", "slug": "rootinsurance"},
+    {"name": "Kin Insurance", "ats": "greenhouse", "slug": "kininsurance"},
+    {"name": "Hippo", "ats": "greenhouse", "slug": "hippo70"},
+    {"name": "Affirm", "ats": "greenhouse", "slug": "affirm"},
+    {"name": "Chime", "ats": "greenhouse", "slug": "chime"},
+    {"name": "SoFi", "ats": "greenhouse", "slug": "sofi"},
+    {"name": "Brex", "ats": "greenhouse", "slug": "brex"},
+    {"name": "Marqeta", "ats": "greenhouse", "slug": "marqeta"},
+    {"name": "Upstart", "ats": "greenhouse", "slug": "upstart"},
+    {"name": "Ramp", "ats": "ashby", "slug": "ramp"},
+    {"name": "Plaid", "ats": "lever", "slug": "plaid"},
+    {"name": "Mercury", "ats": "greenhouse", "slug": "mercury"},
+    {"name": "Carta", "ats": "greenhouse", "slug": "carta"}
+  ]
+}
