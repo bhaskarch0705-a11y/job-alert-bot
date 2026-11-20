@@ -34,6 +34,9 @@ ROOT = Path(__file__).parent
 CONFIG = json.loads((ROOT / "config.json").read_text())
 SEEN_PATH = ROOT / "seen.json"
 DIGEST_PATH = ROOT / "digest.json"
+HEALTH_PATH = ROOT / "health.json"
+H1B_PATH = ROOT / "h1b.json"
+H1B = json.loads(H1B_PATH.read_text()) if H1B_PATH.exists() else {}
 HEADERS = {"User-Agent": "Mozilla/5.0 (personal job alert bot)", "Accept": "application/json"}
 WORKERS = 12
 NOW = datetime.now(timezone.utc)
@@ -260,6 +263,54 @@ def distinct(regex, text):
     return sorted({m.group(0).lower() for m in regex.finditer(text)})
 
 
+EXCLUDE_WORDS = re.compile(r"\b(exclud\w*|not (?:able|eligible|open)|unable|cannot|can't|do not|does not|"
+                           r"not currently|must not|may not|except|exception|outside of|restrict\w*|prohibit\w*)", re.I)
+ONLY_STATES = re.compile(r"\b(?:only|currently)\b[^.]{0,40}\b(?:hire|hiring|employ|accept\w*|consider\w*|"
+                         r"located|reside|residents?)\b[^.]{0,80}\bstates?\b", re.I)
+STATE_CODE = re.compile(r"\b[A-Z]{2}\b")
+MISSOURI = re.compile(r"\bMissouri\b|\bMO\b")
+TEXAS = re.compile(r"\bTexas\b|\bTX\b")
+
+
+def state_note(job):
+    """For remote jobs: warn when Missouri is excluded, and say whether Texas works."""
+    if job.get("mode") != "Remote":
+        return ""
+    mo_out = tx_out = False
+    for s in re.split(r"(?<=[.!?;])\s+", job["text"]):
+        listed = len(STATE_CODE.findall(s)) >= 3 or re.search(r"\b(?:Alabama|Arizona|Colorado|Texas|"
+                                                               r"Florida|Missouri|Kansas)\b", s)
+        if not listed:
+            continue
+        if EXCLUDE_WORDS.search(s) and MISSOURI.search(s):
+            mo_out = True
+            tx_out = tx_out or bool(TEXAS.search(s))
+        elif ONLY_STATES.search(s) and not MISSOURI.search(s):
+            mo_out = True
+            tx_out = tx_out or not TEXAS.search(s)
+    if not mo_out:
+        return ""
+    if tx_out:
+        return "Remote, but Missouri and Texas look excluded: check the state list"
+    return "Remote, but Missouri looks excluded: apply with your Texas address"
+
+
+def h1b_label(company):
+    info = (H1B.get("companies") or {}).get(company)
+    if info is None:
+        return ""
+    period = H1B.get("period", "")
+    if not info.get("data_roles"):
+        return f"H-1B: no data-role filings found ({period})"
+    return f"H-1B: {info['data_roles']} data-role filings, {info['all_roles']} total ({period})"
+
+
+def title_key(job):
+    t = re.sub(r"[^a-z0-9 ]", " ", job["title"].lower())
+    t = re.sub(r"\b(?:req|r|id)\s*\d+\b|\b\d{4,}\b", " ", t)
+    return "t:" + job["company"].lower() + "|" + " ".join(t.split())
+
+
 REMOTE_TEXT = re.compile(r"\b(fully remote|100% remote|remote[- ]first|remote position|remote role|"
                          r"work from home|work from anywhere)\b", re.I)
 
@@ -320,6 +371,8 @@ def score_job(job):
         score += S["points"].get("hidden_gem", 10)
         why.append(f"Hidden gem +{S['points'].get('hidden_gem', 10)}")
     job["mode"] = work_mode(job)
+    job["note"] = state_note(job)
+    job["h1b"] = h1b_label(job["company"])
     if domain == "core" and tpts >= S["tier1_min_tool_points"] and score >= S["tier1_min_score"]:
         tier = 1
     elif score >= S["tier2_min_score"]:
@@ -415,13 +468,14 @@ def job_html(j):
             + (f" | Posted {age_text(j.get('age'))}" if j.get("age") is not None else "")
             + (f" | Pay: {html.escape(j['pay'])}" if j.get("pay") else ""),
             f"<span style='color:#777'>{html.escape(j['why'])}</span>"]
+    if j.get("h1b"):
+        bits.append(f"<span style='color:#1565c0'>{html.escape(j['h1b'])}</span>")
+    if j.get("note"):
+        bits.append(f"<b style='color:#e65100'>{html.escape(j['note'])}</b>")
     return "<p>" + "<br>".join(bits) + "</p>"
 
 
 def send_email(subject, jobs, intro, extra_note="", low_jobs=None):
-    user = os.environ["EMAIL_USER"]
-    pwd = os.environ["EMAIL_APP_PASSWORD"]
-    to = os.environ.get("EMAIL_TO", user)
     body = f"<p>{intro}</p>"
     for _, label in BANDS:
         group = [j for j in jobs if band(j["score"]) == label]
@@ -437,12 +491,18 @@ def send_email(subject, jobs, intro, extra_note="", low_jobs=None):
              "not stated), +10 for a hidden gem. Postings saying no sponsorship were skipped; "
              "still confirm with the "
              "recruiter.</p>")
-    msg = EmailMessage()
     best = max(j["score"] for j in (jobs or low_jobs))
-    msg["Subject"] = f"[{band(best)}] {subject}"
+    deliver(f"[{band(best)}] {subject}", body)
+
+
+def deliver(subject, body):
+    user = os.environ["EMAIL_USER"]
+    pwd = os.environ["EMAIL_APP_PASSWORD"]
+    msg = EmailMessage()
+    msg["Subject"] = subject
     msg["From"] = user
-    msg["To"] = to
-    msg.set_content("Open this email in HTML view to see the job list.")
+    msg["To"] = os.environ.get("EMAIL_TO", user)
+    msg.set_content("Open this email in HTML view.")
     msg.add_alternative(body, subtype="html")
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as s:
         s.login(user, pwd)
@@ -462,6 +522,55 @@ def top(jobs, n):
 def short_names(jobs):
     return ", ".join(dict.fromkeys(j["company"] for j in jobs))[:100]
 
+# ---------- weekly health report ----------
+
+def week_key():
+    y, w, _ = NOW.astimezone(LOCAL_TZ).isocalendar()
+    return f"{y}-W{w:02d}"
+
+
+def new_health():
+    return {"week": week_key(), "runs": 0, "errors": {}, "empty": {}, "alerts": {},
+            "tier1": 0, "tier2": 0, "lower": 0, "reposts": 0}
+
+
+def load_health():
+    if HEALTH_PATH.exists():
+        return json.loads(HEALTH_PATH.read_text())
+    return new_health()
+
+
+def bump(d, k, n=1):
+    d[k] = d.get(k, 0) + n
+
+
+def health_report(h, n_companies):
+    runs = max(h["runs"], 1)
+    top_cos = sorted(h["alerts"].items(), key=lambda kv: -kv[1])[:15]
+    broken = sorted(h["errors"].items(), key=lambda kv: -kv[1])
+    empty = sorted(c for c, n in h["empty"].items() if n >= runs)
+    total = h["tier1"] + h["tier2"] + h["lower"]
+
+    def li(rows):
+        return "<ul>" + "".join(f"<li>{html.escape(str(r))}</li>" for r in rows) + "</ul>"
+
+    body = (f"<h3>Week {h['week']}</h3><p>{h['runs']} runs across {n_companies} companies. "
+            f"{total} matches: {h['tier1']} Tier 1, {h['tier2']} Tier 2, {h['lower']} lower fit. "
+            f"{h['reposts']} reposts skipped.</p>")
+    body += "<h4>Most matches by company</h4>"
+    body += li(f"{c}: {n}" for c, n in top_cos) if top_cos else "<p>None.</p>"
+    body += "<h4>Feeds that failed</h4>"
+    body += (li(f"{c}: failed {n} of {h['runs']} runs" for c, n in broken) if broken
+             else "<p>None. Every feed worked on every run.</p>")
+    if empty:
+        body += ("<h4>Feeds that returned 0 jobs all week</h4><p>Could be a hiring freeze or a "
+                 "changed job board.</p>" + li(empty))
+    if H1B.get("period"):
+        body += (f"<p style='color:#777'>H-1B data: {html.escape(H1B['period'])}, "
+                 f"updated {html.escape(H1B.get('updated', ''))}.</p>")
+    deliver(f"[Weekly] Job bot health: {total} matches, {len(broken)} feed problem(s)", body)
+
+
 # ---------- main ----------
 
 def main():
@@ -478,14 +587,18 @@ def main():
 
     with ThreadPoolExecutor(WORKERS) as pool:
         results = list(pool.map(grab, companies))
+    health = load_health()
     for c, jobs, err in results:
         label = c.get("slug") or c.get("site", "")
         if err is None:
             all_jobs.extend(jobs)
+            if not jobs:
+                bump(health["empty"], c["name"])
             if mode == "--check":
                 print(f"OK   {c['name']:<32} {c['ats']:<10} {len(jobs)} jobs")
         else:
             errors.append(f"{c['name']} ({c['ats']}:{label}): {err}")
+            bump(health["errors"], c["name"])
             if mode == "--check":
                 print(f"FAIL {c['name']:<32} {c['ats']:<10} {err} (wrong slug or site down?)")
     if mode == "--check":
@@ -500,6 +613,19 @@ def main():
     with ThreadPoolExecutor(WORKERS) as pool:
         verdicts = list(pool.map(check_job, to_check))
     matches = [j for j, (keep, _) in zip(to_check, verdicts) if keep]
+    reposts = 0
+    if mode != "--dry-run":
+        # Same company + same title seen live in the last 30 days = a repost, not a new job.
+        cutoff = (NOW - timedelta(days=int(CONFIG.get("repost_days", 30)))).date().isoformat()
+        kept, this_run = [], set()
+        for j in sorted(matches, key=lambda j: -j["score"]):
+            k = title_key(j)
+            if seen.get(k, "") >= cutoff or k in this_run:
+                reposts += 1
+                continue
+            this_run.add(k)
+            kept.append(j)
+        matches = kept
     t1 = [j for j in matches if j["tier"] == 1]
     t2 = [j for j in matches if j["tier"] == 2]
     t3 = [j for j in matches if j["tier"] == 3]
@@ -507,7 +633,7 @@ def main():
 
     print(f"Fetched {len(all_jobs)} jobs from {len(companies) - len(errors)} companies; "
           f"checked {len(to_check)} unseen; tier 1: {len(t1)}, tier 2: {len(t2)}, lower fit: {len(t3)}, "
-          f"dropped as low fit: {dropped}.")
+          f"dropped as low fit: {dropped}, reposts skipped: {reposts}.")
     for e in errors:
         print("Feed error:", e)
 
@@ -520,6 +646,7 @@ def main():
     today = NOW.date().isoformat()
     for j in all_jobs:  # record every live job with today's date (old ones get pruned later)
         seen[j["id"]] = today
+        seen[title_key(j)] = today
 
     digest = load_digest()
     if t1:
@@ -548,6 +675,20 @@ def main():
         digest = {"pending": [], "pending_low": [], "last_slot": slot}
     save_digest(digest)
     save_seen(seen)
+
+    health["runs"] += 1
+    health["tier1"] += len(t1)
+    health["tier2"] += len(t2)
+    health["lower"] += len(t3)
+    health["reposts"] += reposts
+    for j in matches:
+        bump(health["alerts"], j["company"])
+    local = NOW.astimezone(LOCAL_TZ)
+    if health["week"] != week_key() and local.weekday() == 0 and local.hour >= 7:
+        health_report(health, len(companies))
+        print("Sent weekly health report.")
+        health = new_health()
+    HEALTH_PATH.write_text(json.dumps(health, indent=0, sort_keys=True))
 
 
 if __name__ == "__main__":
