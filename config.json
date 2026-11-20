@@ -137,8 +137,10 @@
  },
  "timezone": "America/Chicago",
  "digest_hours_local": [
-  8,
-  16
+  7,
+  13,
+  16,
+  19
  ],
  "max_jobs_per_email": 15,
  "workday_search_terms": [
