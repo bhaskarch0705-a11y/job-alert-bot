@@ -160,6 +160,7 @@
  ],
  "workday_pages_per_term": 3,
  "companies": [
+  {"name":"Adzuna (many employers)","ats":"adzuna","every_hours":2,"start_hour":6,"end_hour":22,"max_days_old":1,"queries":["data engineer","data analyst","business intelligence"]},
   {"name":"Definitive Healthcare","ats":"greenhouse","slug":"definitivehc","priority":true,"gem":true},
   {"name":"Judi Health (Capital Rx)","ats":"greenhouse","slug":"judihealth","priority":true,"gem":true,"h1b_names":["JUDI HEALTH","CAPITAL RX"]},
   {"name":"Pie Insurance","ats":"greenhouse","slug":"pieinsurance","priority":true,"gem":true},
