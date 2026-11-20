@@ -172,9 +172,11 @@ def from_workday(c):
     base = f"https://{host}/wday/cxs/{tenant}/{site}"
     terms = CONFIG.get("workday_search_terms", ["data analyst", "data engineer"])
     pages = int(CONFIG.get("workday_pages_per_term", 3))
+    top_terms = set(CONFIG.get("workday_top_terms", []))
+    top_pages = int(CONFIG.get("workday_top_pages_per_term", pages))
     found = {}
     for term in terms:
-        for page in range(pages):
+        for page in range(top_pages if term in top_terms else pages):
             data = fetch_json(f"{base}/jobs", {
                 "appliedFacets": {}, "limit": 20, "offset": page * 20, "searchText": term,
             })
@@ -354,6 +356,7 @@ SECOND_DOMAIN = kw_regex(S["second_domain_keywords"])
 SECOND_TITLE = kw_regex(S["second_title_only_keywords"])
 TOOLS = kw_regex(S["tools"])
 TITLE_CORE = re.compile(S["title_core"], re.I)
+TITLE_TOP = re.compile(S["title_top"], re.I) if S.get("title_top") else None
 TOOL_NAMES = {"powerbi": "Power BI", "pyspark": "Spark", "elt": "ETL", "datamodeling": "Data modeling",
               "datamodelling": "Data modeling", "bigquery": "BigQuery", "dbt": "dbt"}
 
@@ -469,8 +472,13 @@ def score_job(job):
     if tools:
         why.append(f"Tools +{tpts} ({', '.join(tools[:6])})")
 
-    tl = S["points"]["title_core"] if TITLE_CORE.search(title) else S["points"]["title_other"]
-    why.append(f"Title +{tl}")
+    top_title = bool(TITLE_TOP and TITLE_TOP.search(title))
+    if top_title:
+        tl = S["points"].get("title_top", S["points"]["title_core"])
+        why.append(f"Top title +{tl}")
+    else:
+        tl = S["points"]["title_core"] if TITLE_CORE.search(title) else S["points"]["title_other"]
+        why.append(f"Title +{tl}")
 
     yrs = job.get("years")
     if yrs is None:
@@ -487,7 +495,9 @@ def score_job(job):
     job["mode"] = work_mode(job)
     job["note"] = state_note(job)
     job["h1b"] = h1b_label(job["company"])
-    if domain == "core" and tpts >= S["tier1_min_tool_points"] and score >= S["tier1_min_score"]:
+    # Tier 1: your domain, or a top title (data engineer / data analyst / analytics engineer)
+    # anywhere, as long as the tools match and the score clears the bar.
+    if (domain == "core" or top_title) and tpts >= S["tier1_min_tool_points"] and score >= S["tier1_min_score"]:
         tier = 1
     elif score >= S["tier2_min_score"]:
         tier = 2

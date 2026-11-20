@@ -1,6 +1,6 @@
 {
  "filters": {
-  "title_include": "data engineer|data engineering|data analyst|business analyst|business data analyst|business systems analyst|business process analyst|operations (data )?analyst|marketing (data )?analyst|media analyst|data quality analyst|quality and reporting analyst|reporting analyst|sql analyst|sql developer|analytics engineer|data analytics engineer|business intelligence|\\bBI (engineer|analyst|developer)\\b|power ?bi developer|tableau developer|\\banalyst\\b[^|]{0,25}\\bdata\\b|\\bdata\\b[^|]{0,25}\\banalyst\\b|\\bengineer\\b[^|]{0,25}\\bdata\\b",
+  "title_include": "data engineer|\\bdata (platform|pipeline|integration) engineer\\b|\\bETL (engineer|developer)\\b|analytics engineering|data engineering|data analyst|business analyst|business data analyst|business systems analyst|business process analyst|operations (data )?analyst|marketing (data )?analyst|media analyst|data quality analyst|quality and reporting analyst|reporting analyst|sql analyst|sql developer|analytics engineer|data analytics engineer|business intelligence|\\bBI (engineer|analyst|developer)\\b|power ?bi developer|tableau developer|\\banalyst\\b[^|]{0,25}\\bdata\\b|\\bdata\\b[^|]{0,25}\\banalyst\\b|\\bengineer\\b[^|]{0,25}\\bdata\\b",
   "title_exclude": "\\b(staff|principal|lead|manager|director|head|vp|vice president|architect|intern|internship|scientist)\\b|\\bIV\\b",
   "max_min_years": 6,
   "location_exclude": "\\b(india|bangalore|bengaluru|hyderabad|pune|chennai|gurgaon|gurugram|noida|mumbai|canada|toronto|vancouver|montreal|london|united kingdom|\\bUK\\b|ireland|dublin|germany|berlin|poland|warsaw|krakow|mexico|brazil|philippines|manila|israel|tel aviv|australia|sydney|singapore|costa rica|argentina|colombia|spain|portugal|netherlands|amsterdam|france|paris|japan|china|hong kong)\\b",
@@ -124,12 +124,14 @@
    "kafka",
    "data modell?ing"
   ],
+  "title_top": "data engineer|data engineering|data analyst|analytics engineer|analytics engineering|\\bdata (platform|pipeline|integration) engineer\\b|\\bETL (engineer|developer)\\b",
   "title_core": "data engineer|data analyst|business intelligence|\\bBI (engineer|analyst|developer)\\b|power ?bi|business analyst|business data analyst|business process analyst|media analyst|reporting|data quality|sql analyst|analytics engineer|tableau developer",
   "points": {
    "core_domain": 40,
    "second_domain": 20,
    "per_tool": 5,
    "tools_max": 30,
+   "title_top": 30,
    "title_core": 20,
    "title_other": 10,
    "exp_fit": 10,
@@ -163,8 +165,10 @@
   "business systems analyst"
  ],
  "workday_pages_per_term": 3,
+ "workday_top_terms": ["data engineer", "data analyst", "analytics engineer", "data engineering"],
+ "workday_top_pages_per_term": 6,
  "companies": [
-  {"name":"Adzuna (many employers)","ats":"adzuna","every_hours":2,"start_hour":6,"end_hour":22,"max_days_old":1,"queries":["data engineer","data analyst","business intelligence"]},
+  {"name":"Adzuna (many employers)","ats":"adzuna","every_hours":2,"start_hour":6,"end_hour":21,"max_days_old":1,"queries":["data engineer","data analyst","analytics engineer","business intelligence"]},
   {"name":"Definitive Healthcare","ats":"greenhouse","slug":"definitivehc","priority":true,"gem":true},
   {"name":"Judi Health (Capital Rx)","ats":"greenhouse","slug":"judihealth","priority":true,"gem":true,"h1b_names":["JUDI HEALTH","CAPITAL RX"]},
   {"name":"Pie Insurance","ats":"greenhouse","slug":"pieinsurance","priority":true,"gem":true},
