@@ -1,15 +1,16 @@
 {
 "alerts": {
-"CVS Health / Aetna": 1,
+"CVS Health / Aetna": 2,
 "Centene": 1,
-"McKesson": 2
+"McKesson": 2,
+"State Street": 1
 },
 "empty": {},
 "errors": {},
 "lower": 0,
 "reposts": 0,
-"runs": 10,
-"tier1": 3,
+"runs": 11,
+"tier1": 5,
 "tier2": 1,
 "week": "2026-W47"
 }
