@@ -1,12 +1,15 @@
 name: job-bot
 
+# GitHub only fires "*/10" schedules about once an hour on free repos, so instead each
+# hourly run stays alive for ~55 minutes and checks every 10 minutes itself.
+# Public repo = unlimited free minutes. (A private repo would run out of free minutes.)
 on:
   schedule:
-    - cron: "*/10 * * * *"   # every 10 minutes (GitHub may delay a few minutes at busy times)
-  workflow_dispatch:          # lets you run it by hand from the Actions tab
+    - cron: "0 * * * *"
+  workflow_dispatch:
 
 permissions:
-  contents: write             # needed to save seen.json back to the repo
+  contents: write # needed to save seen.json back to the repo
 
 concurrency:
   group: job-bot
@@ -15,7 +18,7 @@ concurrency:
 jobs:
   check-jobs:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 75
     steps:
       - uses: actions/checkout@v4
 
@@ -23,16 +26,29 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Run job bot
+      - name: Check jobs every 10 minutes for about an hour
         env:
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
           EMAIL_APP_PASSWORD: ${{ secrets.EMAIL_APP_PASSWORD }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
-        run: python job_bot.py
-
-      - name: Save seen jobs
+          INTERVAL_MIN: "10"
+          LOOP_MIN: "55"
         run: |
           git config user.name "job-bot"
           git config user.email "job-bot@users.noreply.github.com"
-          git add seen.json digest.json health.json
-          git diff --cached --quiet || (git commit -m "Update seen jobs" && git pull --rebase && git push)
+          end=$((SECONDS + LOOP_MIN * 60))
+          while true; do
+            git pull --rebase -q || true   # pick up config edits made while running
+            python job_bot.py || echo "Run failed; trying again next round."
+            git add seen.json digest.json health.json
+            if ! git diff --cached --quiet; then
+              git commit -q -m "Update seen jobs"
+              for i in 1 2 3; do
+                git pull --rebase -X theirs -q && git push -q && break
+                git rebase --abort 2>/dev/null || true
+                sleep 5
+              done
+            fi
+            [ $((SECONDS + INTERVAL_MIN * 60)) -ge $end ] && break
+            sleep $((INTERVAL_MIN * 60))
+          done
