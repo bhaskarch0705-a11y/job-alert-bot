@@ -22,6 +22,7 @@
 "errors": {
 "Abbott": 1,
 "Adobe": 1,
+"Adzuna (many employers)": 1,
 "Cigna / Evernorth": 1,
 "Citi": 1,
 "NVIDIA": 1,
@@ -30,7 +31,7 @@
 },
 "lower": 1,
 "reposts": 0,
-"runs": 16,
+"runs": 17,
 "tier1": 17,
 "tier2": 14,
 "week": "2026-W47"
