@@ -192,6 +192,7 @@ def fetch_company(company):
     for job in SOURCES[company["ats"]](company):
         job["company"] = company["name"]
         job["priority_company"] = bool(company.get("priority"))
+        job["gem"] = bool(company.get("gem"))
         jobs.append(job)
     return jobs
 
@@ -259,6 +260,23 @@ def distinct(regex, text):
     return sorted({m.group(0).lower() for m in regex.finditer(text)})
 
 
+REMOTE_TEXT = re.compile(r"\b(fully remote|100% remote|remote[- ]first|remote position|remote role|"
+                         r"work from home|work from anywhere)\b", re.I)
+
+
+def work_mode(job):
+    where = (job.get("location") or "") + " " + job["title"]
+    if re.search(r"\bhybrid\b", where, re.I):
+        return "Hybrid"
+    if re.search(r"\bremote\b", where, re.I):
+        return "Remote"
+    if re.search(r"\bhybrid\b", job["text"], re.I):
+        return "Hybrid"
+    if REMOTE_TEXT.search(job["text"]):
+        return "Remote"
+    return "On-site"
+
+
 def score_job(job):
     """Fill job['score'], job['tier'] and job['why'] (a short explanation)."""
     title, text = job["title"], job["text"]
@@ -298,6 +316,10 @@ def score_job(job):
         why.append(f"Exp +{epts} (asks {yrs} yrs)")
 
     score = dpts + tpts + tl + epts
+    if job.get("gem"):
+        score += S["points"].get("hidden_gem", 10)
+        why.append(f"Hidden gem +{S['points'].get('hidden_gem', 10)}")
+    job["mode"] = work_mode(job)
     if domain == "core" and tpts >= S["tier1_min_tool_points"] and score >= S["tier1_min_score"]:
         tier = 1
     elif score >= S["tier2_min_score"]:
@@ -376,11 +398,20 @@ def age_text(a):
     return "within 24h" if a < 1 else f"{int(a)} day(s) ago"
 
 
+BANDS = [(90, "90+"), (80, "80-89"), (70, "70-79"), (60, "60-69"), (50, "50-59"), (0, "under 50")]
+
+
+def band(score):
+    return next(label for low, label in BANDS if score >= low)
+
+
 def job_html(j):
     color = "#b00020" if j["tier"] == 1 else "#555"
+    gem = " <b style='color:#00796b'>HIDDEN GEM</b>" if j.get("gem") else ""
     bits = [f"<span style='color:{color}'><b>[{j['score']}]</b></span> "
-            f"<b><a href='{html.escape(j['url'])}'>{html.escape(j['title'])}</a></b>",
+            f"<b><a href='{html.escape(j['url'])}'>{html.escape(j['title'])}</a></b>{gem}",
             f"{html.escape(j['company'])} | {html.escape(j['location'] or 'Location not listed')}"
+            + f" | {j.get('mode', 'On-site')}"
             + (f" | Posted {age_text(j.get('age'))}" if j.get("age") is not None else "")
             + (f" | Pay: {html.escape(j['pay'])}" if j.get("pay") else ""),
             f"<span style='color:#777'>{html.escape(j['why'])}</span>"]
@@ -391,7 +422,11 @@ def send_email(subject, jobs, intro, extra_note="", low_jobs=None):
     user = os.environ["EMAIL_USER"]
     pwd = os.environ["EMAIL_APP_PASSWORD"]
     to = os.environ.get("EMAIL_TO", user)
-    body = f"<p>{intro}</p>" + "".join(job_html(j) for j in jobs)
+    body = f"<p>{intro}</p>"
+    for _, label in BANDS:
+        group = [j for j in jobs if band(j["score"]) == label]
+        if group:
+            body += f"<h3>Score {label} ({len(group)})</h3>" + "".join(job_html(j) for j in group)
     if extra_note:
         body += f"<p><i>{extra_note}</i></p>"
     if low_jobs:
@@ -399,10 +434,12 @@ def send_email(subject, jobs, intro, extra_note="", low_jobs=None):
                  "domains</h3>") + "".join(job_html(j) for j in low_jobs)
     body += ("<p style='color:#777'>Score = domain (40 core, 20 finance/ops/revenue/pricing) + "
              "tools (5 each, max 30) + title (20 core, 10 other) + experience fit (10, or 5 if "
-             "not stated). Postings saying no sponsorship were skipped; still confirm with the "
+             "not stated), +10 for a hidden gem. Postings saying no sponsorship were skipped; "
+             "still confirm with the "
              "recruiter.</p>")
     msg = EmailMessage()
-    msg["Subject"] = subject
+    best = max(j["score"] for j in (jobs or low_jobs))
+    msg["Subject"] = f"[{band(best)}] {subject}"
     msg["From"] = user
     msg["To"] = to
     msg.set_content("Open this email in HTML view to see the job list.")
