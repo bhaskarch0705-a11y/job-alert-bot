@@ -11,6 +11,7 @@ Matching is by employer name, so a company filing under a very different
 legal name can show as "no filings found". Add "h1b_names": ["LEGAL NAME"]
 to that company in config.json to fix it.
 """
+import hashlib
 import json
 import re
 import sys
@@ -38,6 +39,7 @@ SUFFIXES = {"INC", "INCORPORATED", "LLC", "L L C", "LP", "LLP", "LTD", "CORP", "
 
 def norm(name):
     s = re.sub(r"[^A-Z0-9 ]", " ", str(name or "").upper())
+    s = re.sub(r"\b(?:NATIONAL ASSOCIATION|N A|L L C)\b", " ", s)
     words = [w for w in s.split() if w not in SUFFIXES]
     return " ".join(words)
 
@@ -65,11 +67,11 @@ def matchers():
     """Map each tracked company to the normalized employer names that count for it."""
     out = []
     for c in CONFIG["companies"]:
-        names = c.get("h1b_names") or [c["name"]]
-        for n in names:
+        explicit = bool(c.get("h1b_names"))
+        for n in c.get("h1b_names") or [c["name"]]:
             key = norm(re.sub(r"\(.*?\)", " ", n))  # "Judi Health (Capital Rx)" -> "JUDI HEALTH"
             if key:
-                out.append((key, c["name"]))
+                out.append((key, c["name"], explicit))
     return out
 
 
@@ -78,9 +80,10 @@ def company_for(employer, rules, cache):
         return cache[employer]
     e = norm(employer)
     hit = None
-    for key, company in rules:
-        # short names (Ro, Hex, Block...) must match exactly; longer ones may be a prefix
-        if e == key or (len(key) > 6 and e.startswith(key + " ")):
+    for key, company, explicit in rules:
+        # short names (Ro, Hex, Block...) must match exactly unless listed in h1b_names;
+        # longer ones may be a prefix ("CAPITAL ONE" matches "CAPITAL ONE SERVICES")
+        if e == key or ((explicit or len(key) > 6) and e.startswith(key + " ")):
             hit = company
             break
     cache[employer] = hit
@@ -122,7 +125,10 @@ def main():
         sys.exit("No LCA disclosure files found on the DOL page; layout may have changed.")
     labels = [f"FY{fy} Q{q}" for (fy, q), _ in links]
     period = f"{labels[-1]} to {labels[0]}" if len(labels) > 1 else labels[0]
-    if OUT.exists() and json.loads(OUT.read_text()).get("files") == labels and "--force" not in sys.argv:
+    sig = hashlib.sha256(json.dumps([(c["name"], c.get("h1b_names")) for c in CONFIG["companies"]])
+                         .encode()).hexdigest()[:12]
+    prev = json.loads(OUT.read_text()) if OUT.exists() else {}
+    if prev.get("files") == labels and prev.get("sig") == sig and "--force" not in sys.argv:
         print("H-1B data already up to date:", period)
         return
     rules, cache, counts = matchers(), {}, {}
@@ -137,7 +143,7 @@ def main():
     companies = {c["name"]: counts.get(c["name"], {"all_roles": 0, "data_roles": 0})
                  for c in CONFIG["companies"]}
     OUT.write_text(json.dumps({
-        "period": period, "files": labels,
+        "period": period, "files": labels, "sig": sig,
         "updated": datetime.now(timezone.utc).date().isoformat(),
         "companies": companies}, indent=1, sort_keys=True))
     found = sum(1 for v in companies.values() if v["all_roles"])
