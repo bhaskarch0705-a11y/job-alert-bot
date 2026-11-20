@@ -65,8 +65,8 @@
    "data_roles": 10
   },
   "Bank of America": {
-   "all_roles": 556,
-   "data_roles": 136
+   "all_roles": 842,
+   "data_roles": 189
   },
   "Bankjoy": {
    "all_roles": 0,
@@ -89,16 +89,16 @@
    "data_roles": 31
   },
   "Blue Cross NC": {
-   "all_roles": 0,
-   "data_roles": 0
+   "all_roles": 2,
+   "data_roles": 1
   },
   "Brex": {
    "all_roles": 22,
    "data_roles": 2
   },
   "CVS Health / Aetna": {
-   "all_roles": 0,
-   "data_roles": 0
+   "all_roles": 562,
+   "data_roles": 195
   },
   "Calendly": {
    "all_roles": 2,
@@ -173,7 +173,7 @@
    "data_roles": 1
   },
   "Column": {
-   "all_roles": 0,
+   "all_roles": 1,
    "data_roles": 0
   },
   "Commure": {
@@ -273,8 +273,8 @@
    "data_roles": 0
   },
   "Fidelity": {
-   "all_roles": 2628,
-   "data_roles": 528
+   "all_roles": 225,
+   "data_roles": 127
   },
   "Fifth Third Bank": {
    "all_roles": 55,
@@ -357,8 +357,8 @@
    "data_roles": 0
   },
   "Hims & Hers": {
-   "all_roles": 0,
-   "data_roles": 0
+   "all_roles": 23,
+   "data_roles": 7
   },
   "Hippo": {
    "all_roles": 0,
@@ -389,8 +389,8 @@
    "data_roles": 2
   },
   "Judi Health (Capital Rx)": {
-   "all_roles": 0,
-   "data_roles": 0
+   "all_roles": 12,
+   "data_roles": 4
   },
   "Justworks": {
    "all_roles": 11,
@@ -413,8 +413,8 @@
    "data_roles": 6
   },
   "Labcorp": {
-   "all_roles": 22,
-   "data_roles": 1
+   "all_roles": 137,
+   "data_roles": 41
   },
   "Ladder": {
    "all_roles": 0,
@@ -529,12 +529,12 @@
    "data_roles": 6
   },
   "Oscar Health": {
-   "all_roles": 0,
-   "data_roles": 0
+   "all_roles": 28,
+   "data_roles": 4
   },
   "PNC": {
-   "all_roles": 4,
-   "data_roles": 2
+   "all_roles": 92,
+   "data_roles": 30
   },
   "Pagaya": {
    "all_roles": 0,
@@ -589,8 +589,8 @@
    "data_roles": 0
   },
   "Ro": {
-   "all_roles": 0,
-   "data_roles": 0
+   "all_roles": 1,
+   "data_roles": 1
   },
   "Robinhood": {
    "all_roles": 202,
@@ -717,8 +717,8 @@
    "data_roles": 7
   },
   "USAA": {
-   "all_roles": 0,
-   "data_roles": 0
+   "all_roles": 114,
+   "data_roles": 57
   },
   "Unum": {
    "all_roles": 21,
@@ -776,5 +776,6 @@
   "FY2026 Q1"
  ],
  "period": "FY2026 Q1 to FY2026 Q4",
+ "sig": "fea2607b3ff0",
  "updated": "2026-11-20"
 }
