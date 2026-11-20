@@ -30,7 +30,7 @@ from contextlib import nullcontext
 from datetime import datetime, timedelta, timezone
 from email.message import EmailMessage
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urlencode
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
@@ -41,6 +41,7 @@ SEEN_PATH = ROOT / "seen.json"
 DIGEST_PATH = ROOT / "digest.json"
 HEALTH_PATH = ROOT / "health.json"
 H1B_PATH = ROOT / "h1b.json"
+ADZUNA_PATH = ROOT / "adzuna.json"
 H1B = json.loads(H1B_PATH.read_text()) if H1B_PATH.exists() else {}
 HEADERS = {"User-Agent": "Mozilla/5.0 (personal job alert bot)", "Accept": "application/json"}
 WORKERS = 12
@@ -235,7 +236,63 @@ def from_oracle(c):
         }
 
 
+def norm_company(s):
+    s = re.sub(r"[^a-z0-9 ]", " ", (s or "").lower().split("/")[0].split("(")[0])
+    s = re.sub(r"\b(the|inc|llc|corp|corporation|company|co|group|holdings|na)\b", " ", s)
+    return " ".join(s.split())
+
+
+def from_adzuna(c):
+    """Adzuna job search API: new postings from thousands of US employers in one feed.
+    The free key has a small monthly quota (about 1,000 calls), so Adzuna is only
+    called once every every_hours hours between start_hour and end_hour (local)."""
+    app_id, app_key = os.environ.get("ADZUNA_APP_ID"), os.environ.get("ADZUNA_APP_KEY")
+    if not (app_id and app_key):
+        raise RuntimeError("ADZUNA_APP_ID / ADZUNA_APP_KEY secrets are not set")
+    local = NOW.astimezone(LOCAL_TZ)
+    if not (int(c.get("start_hour", 6)) <= local.hour <= int(c.get("end_hour", 22))):
+        return
+    slot = f"{local.date().isoformat()}-{local.hour // int(c.get('every_hours', 2))}"
+    state = json.loads(ADZUNA_PATH.read_text()) if ADZUNA_PATH.exists() else {}
+    if state.get("last_slot") == slot:
+        return
+    queries = c.get("queries", ["data engineer", "data analyst", "business intelligence"])
+    found = {}
+    for q in queries:
+        params = {"app_id": app_id, "app_key": app_key, "what_phrase": q,
+                  "max_days_old": int(c.get("max_days_old", 1)), "sort_by": "date",
+                  "results_per_page": 50, "content-type": "application/json"}
+        data = fetch_json("https://api.adzuna.com/v1/api/jobs/us/search/1?" + urlencode(params))
+        for j in data.get("results", []):
+            found.setdefault(str(j.get("id")), j)
+    month = local.strftime("%Y-%m")
+    calls = state.get("calls", {})
+    calls[month] = calls.get(month, 0) + len(queries)
+    ADZUNA_PATH.write_text(json.dumps({"last_slot": slot, "calls": calls}, indent=0))
+    known = {norm_company(x["name"]) for x in CONFIG["companies"]}
+    for jid, j in found.items():
+        co = ((j.get("company") or {}).get("display_name") or "").strip()
+        if co and norm_company(co) in known:
+            continue  # that company's own career feed already covers it
+        pay = ""
+        if j.get("salary_min") and str(j.get("salary_is_predicted", "0")) != "1":
+            pay = f"${int(j['salary_min']):,}"
+            if j.get("salary_max") and j["salary_max"] != j["salary_min"]:
+                pay += f" - ${int(j['salary_max']):,}"
+        yield {
+            "id": f"az:{jid}",
+            "company": co or "Unknown (via Adzuna)",
+            "title": strip_html(j.get("title", "")),
+            "url": j.get("redirect_url", ""),
+            "location": (j.get("location") or {}).get("display_name", ""),
+            "age": iso_age(j.get("created")),
+            "text": strip_html(j.get("description", "")),
+            "pay": pay,
+        }
+
+
 SOURCES = {
+    "adzuna": from_adzuna,
     "oracle": from_oracle,
     "greenhouse": from_greenhouse,
     "lever": from_lever,
@@ -247,7 +304,7 @@ SOURCES = {
 def fetch_company(company):
     jobs = []
     for job in SOURCES[company["ats"]](company):
-        job["company"] = company["name"]
+        job.setdefault("company", company["name"])
         job["priority_company"] = bool(company.get("priority"))
         job["gem"] = bool(company.get("gem"))
         jobs.append(job)
