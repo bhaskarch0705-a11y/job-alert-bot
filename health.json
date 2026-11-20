@@ -1,14 +1,18 @@
 {
 "alerts": {
+"Abbott": 3,
 "Bank of America": 1,
 "CVS Health / Aetna": 4,
 "Centene": 3,
+"Cigna / Evernorth": 2,
+"Citi": 3,
 "Elevance Health": 1,
 "Highmark Health": 1,
 "Intel": 1,
 "JPMorgan Chase": 3,
 "McKesson": 2,
 "Morgan Stanley": 1,
+"NVIDIA": 2,
 "Raymond James": 2,
 "State Street": 1,
 "The Hartford": 1
@@ -25,8 +29,8 @@
 },
 "lower": 1,
 "reposts": 0,
-"runs": 14,
-"tier1": 11,
-"tier2": 9,
+"runs": 15,
+"tier1": 17,
+"tier2": 13,
 "week": "2026-W47"
 }

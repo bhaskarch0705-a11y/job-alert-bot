@@ -1,5 +1,98 @@
 {
-"pending": [],
+"pending": [
+{
+"id": "wd:nvidia:JR2028044",
+"title": "Senior Revenue and Pricing Business Analyst",
+"url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Revenue-and-Pricing-Business-Analyst_JR2028044-1",
+"location": "US, CA, Santa Clara",
+"age": 1,
+"pay": "",
+"company": "NVIDIA",
+"priority_company": false,
+"gem": false,
+"years": 5,
+"mode": "On-site",
+"note": "",
+"h1b": "",
+"score": 80,
+"tier": 2,
+"domain": "second",
+"tools": [
+"Databricks",
+"ETL",
+"Excel",
+"Power BI",
+"SQL",
+"Snowflake",
+"Tableau"
+],
+"why": "Fin/ops/revenue +20 (pricing, revenue) | Tools +30 (Databricks, ETL, Excel, Power BI, SQL, Snowflake) | Title +20 | Exp +10 (asks 5 yrs)"
+},
+{
+"id": "wd:abbott:31167936",
+"title": "Sr Business Analyst",
+"url": "https://abbott.wd5.myworkdayjobs.com/abbottcareers/job/United-States---Illinois---Lake-Forest/Sr-Business-Analyst_31167936-1",
+"location": "United States - Illinois - Lake Forest",
+"age": 2,
+"pay": "$78,000.00 \u2013 $156,000.00",
+"company": "Abbott",
+"priority_company": true,
+"gem": false,
+"years": 2,
+"mode": "On-site",
+"note": "",
+"h1b": "",
+"score": 75,
+"tier": 2,
+"domain": "core",
+"tools": [
+"Excel"
+],
+"why": "Domain +40 (domain company) | Tools +5 (Excel) | Title +20 | Exp +10 (asks 2 yrs)"
+},
+{
+"id": "wd:citi:261005336",
+"title": "Senior Oracle EBS Business Analyst",
+"url": "https://citi.wd5.myworkdayjobs.com/2/job/Tampa-Florida-United-States/Business-Senior-Analyst_261005336",
+"location": "Tampa Florida United States",
+"age": 2,
+"pay": "$79,120.00 - $118,680.00",
+"company": "Citi",
+"priority_company": true,
+"gem": false,
+"years": 5,
+"mode": "On-site",
+"note": "",
+"h1b": "",
+"score": 70,
+"tier": 2,
+"domain": "core",
+"tools": [],
+"why": "Domain +40 (domain company) | Title +20 | Exp +10 (asks 5 yrs)"
+},
+{
+"id": "wd:nvidia:JR2029702",
+"title": "Senior Software Engineer, AI Data",
+"url": "https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/US-CA-Santa-Clara/Senior-Software-Engineer--AI-Data_JR2029702",
+"location": "US, CA, Santa Clara",
+"age": 1,
+"pay": "",
+"company": "NVIDIA",
+"priority_company": false,
+"gem": false,
+"years": 5,
+"mode": "On-site",
+"note": "",
+"h1b": "",
+"score": 45,
+"tier": 2,
+"domain": "second",
+"tools": [
+"Python"
+],
+"why": "Fin/ops/revenue +20 (accounting, forecasting) | Tools +5 (Python) | Title +10 | Exp +10 (asks 5 yrs)"
+}
+],
 "pending_low": [],
 "last_slot": "2026-11-20-14"
 }
