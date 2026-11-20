@@ -1,16 +1,32 @@
 {
 "alerts": {
+"Bank of America": 1,
 "CVS Health / Aetna": 4,
 "Centene": 3,
+"Elevance Health": 1,
+"Highmark Health": 1,
+"Intel": 1,
+"JPMorgan Chase": 3,
 "McKesson": 2,
-"State Street": 1
+"Morgan Stanley": 1,
+"Raymond James": 2,
+"State Street": 1,
+"The Hartford": 1
 },
 "empty": {},
-"errors": {},
-"lower": 0,
+"errors": {
+"Abbott": 1,
+"Adobe": 1,
+"Cigna / Evernorth": 1,
+"Citi": 1,
+"NVIDIA": 1,
+"Thermo Fisher": 1,
+"Zillow": 1
+},
+"lower": 1,
 "reposts": 0,
-"runs": 13,
-"tier1": 7,
-"tier2": 3,
+"runs": 14,
+"tier1": 11,
+"tier2": 9,
 "week": "2026-W47"
 }
