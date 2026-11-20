@@ -331,7 +331,7 @@ def check_job(job):
         p = PAY.search(job["text"])
         job["pay"] = p.group(0) if p else ""
     score_job(job)
-    if job["tier"] == 3:
+    if job["tier"] == 3 and job["score"] < S.get("lower_fit_min", 30):
         return False, f"low fit ({job['score']})"
     return True, "ok"
 
@@ -387,13 +387,16 @@ def job_html(j):
     return "<p>" + "<br>".join(bits) + "</p>"
 
 
-def send_email(subject, jobs, intro, extra_note=""):
+def send_email(subject, jobs, intro, extra_note="", low_jobs=None):
     user = os.environ["EMAIL_USER"]
     pwd = os.environ["EMAIL_APP_PASSWORD"]
     to = os.environ.get("EMAIL_TO", user)
     body = f"<p>{intro}</p>" + "".join(job_html(j) for j in jobs)
     if extra_note:
         body += f"<p><i>{extra_note}</i></p>"
+    if low_jobs:
+        body += ("<h3 style='color:#777'>Lower fit: good title, fewer tools or outside your "
+                 "domains</h3>") + "".join(job_html(j) for j in low_jobs)
     body += ("<p style='color:#777'>Score = domain (40 core, 20 finance/ops/revenue/pricing) + "
              "tools (5 each, max 30) + title (20 core, 10 other) + experience fit (10, or 5 if "
              "not stated). Postings saying no sponsorship were skipped; still confirm with the "
@@ -462,10 +465,11 @@ def main():
     matches = [j for j, (keep, _) in zip(to_check, verdicts) if keep]
     t1 = [j for j in matches if j["tier"] == 1]
     t2 = [j for j in matches if j["tier"] == 2]
+    t3 = [j for j in matches if j["tier"] == 3]
     dropped = sum(1 for _, why in verdicts if why.startswith("low fit"))
 
     print(f"Fetched {len(all_jobs)} jobs from {len(companies) - len(errors)} companies; "
-          f"checked {len(to_check)} unseen; tier 1: {len(t1)}, tier 2: {len(t2)}, "
+          f"checked {len(to_check)} unseen; tier 1: {len(t1)}, tier 2: {len(t2)}, lower fit: {len(t3)}, "
           f"dropped as low fit: {dropped}.")
     for e in errors:
         print("Feed error:", e)
@@ -489,19 +493,22 @@ def main():
         digest["pending"].extend(slim(overflow))
         print(f"Emailed {len(send_now)} tier 1 job(s); {len(overflow)} overflow to digest.")
     digest["pending"].extend(slim(t2))
+    digest.setdefault("pending_low", []).extend(slim(t3))
 
     slot = current_slot()
     if not digest.get("last_slot"):
         digest["last_slot"] = slot  # first run: start the digest clock without sending
-    elif digest["pending"] and digest["last_slot"] != slot:
+    elif (digest["pending"] or digest["pending_low"]) and digest["last_slot"] != slot:
         send_now, rest = top(digest["pending"], cap)
+        low_now, low_rest = top(digest["pending_low"], int(CONFIG.get("max_lower_fit_per_digest", 10)))
         note = f"+{len(rest)} lower-scored role(s) not shown." if rest else ""
-        send_email(f"Digest: {len(digest['pending'])} more data role(s) | {short_names(send_now)}",
+        send_email(f"Digest: {len(digest['pending'])} role(s) + {len(digest['pending_low'])} lower fit"
+                   f" | {short_names(send_now or low_now)}",
                    send_now,
                    "Tier 2 since the last digest (finance, operations, revenue or pricing "
-                   "roles, and strong tool matches in other domains), best fit first:", note)
-        print(f"Sent digest with {len(send_now)} job(s).")
-        digest = {"pending": [], "last_slot": slot}
+                   "roles, and strong tool matches in other domains), best fit first:", note, low_now)
+        print(f"Sent digest with {len(send_now)} job(s) + {len(low_now)} lower fit.")
+        digest = {"pending": [], "pending_low": [], "last_slot": slot}
     save_digest(digest)
     save_seen(seen)
 
