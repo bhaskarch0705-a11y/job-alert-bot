@@ -85,7 +85,7 @@
 "Vericast": 1
 },
 "empty": {
-"Adzuna (many employers)": 48
+"Adzuna (many employers)": 49
 },
 "errors": {
 "Abbott": 14,
@@ -149,12 +149,12 @@
 "USAA": 13,
 "Unum": 13,
 "Wells Fargo": 13,
-"Zelis": 25,
+"Zelis": 26,
 "Zillow": 14
 },
 "lower": 37,
 "reposts": 2,
-"runs": 69,
+"runs": 70,
 "tier1": 24,
 "tier2": 49,
 "week": "2026-W47"
