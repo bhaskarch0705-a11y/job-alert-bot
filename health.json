@@ -125,6 +125,7 @@
 "Rush University Medical Center": 1,
 "SHARP HEALTHCARE": 1,
 "SRS Distribution": 1,
+"STEPS TALENT, LLC": 1,
 "STORD": 1,
 "SYSTEM SOFT TECHNOLOGIES LLC": 1,
 "Salt Lake County": 1,
@@ -162,7 +163,8 @@
 "Xometry": 1,
 "Yellowstone County": 1,
 "Zettalogix INC": 1,
-"ZipStaff": 2
+"ZipStaff": 2,
+"Zoipis": 1
 },
 "empty": {
 "Adzuna (many employers)": 76
@@ -233,13 +235,13 @@
 "Unum": 13,
 "Veeva Systems": 1,
 "Wells Fargo": 13,
-"Zelis": 58,
+"Zelis": 59,
 "Zillow": 14,
 "Zus Health": 1
 },
-"lower": 107,
+"lower": 109,
 "reposts": 18,
-"runs": 102,
+"runs": 103,
 "tier1": 24,
 "tier2": 65,
 "week": "2026-W47"
