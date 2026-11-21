@@ -130,7 +130,7 @@
 "ZipStaff": 2
 },
 "empty": {
-"Adzuna (many employers)": 54
+"Adzuna (many employers)": 55
 },
 "errors": {
 "Abbott": 14,
@@ -197,13 +197,13 @@
 "USAA": 13,
 "Unum": 13,
 "Wells Fargo": 13,
-"Zelis": 32,
+"Zelis": 33,
 "Zillow": 14,
 "Zus Health": 1
 },
 "lower": 75,
 "reposts": 4,
-"runs": 76,
+"runs": 77,
 "tier1": 24,
 "tier2": 59,
 "week": "2026-W47"
