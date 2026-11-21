@@ -84,7 +84,7 @@
 "Vericast": 1
 },
 "empty": {
-"Adzuna (many employers)": 26
+"Adzuna (many employers)": 27
 },
 "errors": {
 "Abbott": 1,
@@ -95,12 +95,12 @@
 "NVIDIA": 1,
 "Palantir": 1,
 "Thermo Fisher": 1,
-"Zelis": 3,
+"Zelis": 4,
 "Zillow": 1
 },
 "lower": 37,
 "reposts": 2,
-"runs": 47,
+"runs": 48,
 "tier1": 24,
 "tier2": 48,
 "week": "2026-W47"
