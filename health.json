@@ -7,6 +7,7 @@
 "Aivanta Tech Inc": 1,
 "Aptino": 1,
 "Avis Global IT Solutions Inc": 1,
+"BECU": 1,
 "Bank of America": 1,
 "Blue Cross and Blue Shield of Louisiana": 1,
 "Booz Allen Hamilton": 1,
@@ -17,6 +18,7 @@
 "CERNER TECHNOLOGIES LLC": 1,
 "CVS Health / Aetna": 4,
 "CapTech Consulting": 1,
+"CareSource": 1,
 "Carnegie Mellon University": 1,
 "Centene": 3,
 "Chubb": 1,
@@ -37,6 +39,7 @@
 "Highmark Health": 1,
 "Highnote": 1,
 "Howmet Aerospace": 1,
+"Huntington Bank": 1,
 "Indotronix International Corp": 1,
 "InfoPeople Corp": 1,
 "Intel": 1,
@@ -45,6 +48,7 @@
 "K-Tek Resourcing LLC": 1,
 "Kentro": 2,
 "Key2Source INC": 1,
+"KeyBank": 2,
 "Kforce Technology Staffing": 1,
 "Kodeva LLC": 1,
 "Lorven Technologies, Inc.": 1,
@@ -56,6 +60,7 @@
 "Nemetschek SE2": 1,
 "Norman Regional Health System": 1,
 "Public Health Foundation Enterprises, In": 1,
+"R1 RCM": 1,
 "Randstad Digital": 1,
 "Raymond James": 2,
 "Rush University Medical Center": 1,
@@ -74,11 +79,12 @@
 "Trebecon LLC": 1,
 "Two95 International Inc.": 1,
 "U.S. Bank": 1,
+"UMB Bank": 1,
 "UniqueHire Consulting LLC": 1,
 "Vericast": 1
 },
 "empty": {
-"Adzuna (many employers)": 23
+"Adzuna (many employers)": 24
 },
 "errors": {
 "Abbott": 1,
@@ -89,12 +95,13 @@
 "NVIDIA": 1,
 "Palantir": 1,
 "Thermo Fisher": 1,
+"Zelis": 1,
 "Zillow": 1
 },
 "lower": 37,
 "reposts": 2,
-"runs": 44,
-"tier1": 20,
-"tier2": 45,
+"runs": 45,
+"tier1": 24,
+"tier2": 48,
 "week": "2026-W47"
 }
