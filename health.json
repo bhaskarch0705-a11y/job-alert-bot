@@ -151,7 +151,7 @@
 "ZipStaff": 2
 },
 "empty": {
-"Adzuna (many employers)": 57
+"Adzuna (many employers)": 58
 },
 "errors": {
 "Abbott": 14,
@@ -159,7 +159,7 @@
 "Adzuna (many employers)": 1,
 "Airtable": 1,
 "Allstate": 13,
-"BECU": 13,
+"BECU": 14,
 "Bank of America": 13,
 "Blue Cross Blue Shield of Louisiana": 13,
 "Blue Cross NC": 13,
@@ -174,7 +174,7 @@
 "Elevance Health": 13,
 "Equifax": 13,
 "Evolent": 13,
-"Fidelity": 13,
+"Fidelity": 14,
 "Fifth Third Bank": 13,
 "Fiserv": 13,
 "Freddie Mac": 13,
@@ -182,7 +182,7 @@
 "Guardian Life": 13,
 "Highmark Health": 13,
 "Humana": 13,
-"Intel": 13,
+"Intel": 14,
 "Kemper": 13,
 "KeyBank": 13,
 "Labcorp": 13,
@@ -200,7 +200,7 @@
 "Payoneer": 1,
 "Pfizer": 13,
 "Porch Insurance": 13,
-"Prime Therapeutics": 13,
+"Prime Therapeutics": 14,
 "Prudential": 13,
 "R1 RCM": 13,
 "Raymond James": 13,
@@ -212,19 +212,19 @@
 "Thermo Fisher": 14,
 "TransUnion": 14,
 "Travelers": 13,
-"Truist": 13,
+"Truist": 14,
 "U.S. Bank": 13,
 "UMB Bank": 13,
-"USAA": 13,
+"USAA": 14,
 "Unum": 13,
 "Wells Fargo": 13,
-"Zelis": 36,
+"Zelis": 37,
 "Zillow": 14,
 "Zus Health": 1
 },
 "lower": 96,
 "reposts": 12,
-"runs": 80,
+"runs": 81,
 "tier1": 24,
 "tier2": 62,
 "week": "2026-W47"
