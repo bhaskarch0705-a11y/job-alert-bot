@@ -1,5 +1,28 @@
 {
-"pending": [],
+"pending": [
+{
+"id": "wd:capitalone:R248897",
+"title": "Sr. Business Analyst",
+"url": "https://capitalone.wd12.myworkdayjobs.com/Capital_One/job/Plano-TX/Sr-Business-Analyst_R248897",
+"location": "Plano, TX",
+"age": 0,
+"pay": "$101,100 - $115,400",
+"company": "Capital One",
+"priority_company": true,
+"gem": false,
+"years": 2,
+"mode": "On-site",
+"note": "",
+"h1b": "H-1B: 810 data-role filings, 1744 total (FY2026 Q1 to FY2026 Q4)",
+"score": 75,
+"tier": 2,
+"domain": "core",
+"tools": [
+"SQL"
+],
+"why": "Domain +40 (domain company) | Tools +5 (SQL) | Title +20 | Exp +10 (asks 2 yrs)"
+}
+],
 "pending_low": [],
 "last_slot": "2026-11-20-21"
 }
