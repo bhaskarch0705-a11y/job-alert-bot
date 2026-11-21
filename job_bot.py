@@ -238,6 +238,41 @@ def from_oracle(c):
         }
 
 
+def from_smartrecruiters(c):
+    """SmartRecruiters public postings API (Experian and others). Searches a few role
+    keywords; the description is loaded later, only for jobs that pass the cheap checks."""
+    company = c["slug"]
+    base = f"https://api.smartrecruiters.com/v1/companies/{quote(company)}/postings"
+    terms = CONFIG.get("smartrecruiters_search_terms") or CONFIG.get("oracle_search_terms", ["data"])
+    found = {}
+    for term in terms:
+        for page in range(3):
+            data = fetch_json(f"{base}?" + urlencode({"q": term, "country": "us", "limit": 100,
+                                                       "offset": page * 100}))
+            items = data.get("content") or []
+            for p in items:
+                found.setdefault(str(p["id"]), p)
+            if len(items) < 100:
+                break
+    for pid, p in found.items():
+        loc = p.get("location") or {}
+        where = loc.get("fullLocation") or ", ".join(x for x in (loc.get("city"), loc.get("region")) if x)
+        if loc.get("remote"):
+            where += " (Remote)"
+        elif loc.get("hybrid"):
+            where += " (Hybrid)"
+        yield {
+            "id": f"sr:{company}:{pid}",
+            "title": p.get("name", ""),
+            "url": f"https://jobs.smartrecruiters.com/{company}/{pid}",
+            "location": where,
+            "age": iso_age(p.get("releasedDate")),
+            "text": "",
+            "pay": "",
+            "detail_url": f"{base}/{pid}",
+        }
+
+
 def norm_company(s):
     s = re.sub(r"[^a-z0-9 ]", " ", (s or "").lower().split("/")[0].split("(")[0])
     s = re.sub(r"\b(the|inc|llc|corp|corporation|company|co|group|holdings|na)\b", " ", s)
@@ -300,6 +335,7 @@ SOURCES = {
     "lever": from_lever,
     "ashby": from_ashby,
     "workday": from_workday,
+    "smartrecruiters": from_smartrecruiters,
 }
 
 
@@ -319,6 +355,13 @@ def load_detail(job):
         return
     for attempt in range(2):
         try:
+            if "smartrecruiters.com" in job["detail_url"]:
+                d = fetch_json(job["detail_url"])
+                sections = ((d.get("jobAd") or {}).get("sections") or {}).values()
+                job["text"] = " ".join(strip_html(s.get("text", "")) for s in sections if isinstance(s, dict))
+                if d.get("postingUrl"):
+                    job["url"] = d["postingUrl"]
+                return
             info = fetch_json(job["detail_url"]).get("jobPostingInfo") or {}
             job["text"] = strip_html(info.get("jobDescription", ""))
             if info.get("location"):
@@ -355,6 +398,7 @@ CORE_TITLE = kw_regex(S["core_title_only_keywords"])
 SECOND_DOMAIN = kw_regex(S["second_domain_keywords"])
 SECOND_TITLE = kw_regex(S["second_title_only_keywords"])
 TOOLS = kw_regex(S["tools"])
+AVOID = kw_regex(S["avoid_keywords"]) if S.get("avoid_keywords") else None
 TITLE_CORE = re.compile(S["title_core"], re.I)
 TITLE_TOP = re.compile(S["title_top"], re.I) if S.get("title_top") else None
 TOOL_NAMES = {"powerbi": "Power BI", "pyspark": "Spark", "elt": "ETL", "datamodeling": "Data modeling",
@@ -489,6 +533,14 @@ def score_job(job):
         why.append(f"Exp +{epts} (asks {yrs} yrs)")
 
     score = dpts + tpts + tl + epts
+    # Domains you chose to avoid for now (trading/IBOR, hospital EHR builds, manufacturing):
+    # one hit in the title or 2+ in the description costs points instead of dropping the job.
+    if AVOID:
+        avoid = distinct(AVOID, title) or (distinct(AVOID, text) if len(distinct(AVOID, text)) >= 2 else [])
+        if avoid:
+            pen = S["points"].get("avoid_domain", 25)
+            score -= pen
+            why.append(f"Avoid domain -{pen} ({', '.join(avoid[:3])})")
     if job.get("gem"):
         score += S["points"].get("hidden_gem", 10)
         why.append(f"Hidden gem +{S['points'].get('hidden_gem', 10)}")
