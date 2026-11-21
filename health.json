@@ -130,12 +130,13 @@
 "ZipStaff": 2
 },
 "empty": {
-"Adzuna (many employers)": 51
+"Adzuna (many employers)": 52
 },
 "errors": {
 "Abbott": 14,
 "Adobe": 14,
 "Adzuna (many employers)": 1,
+"Airtable": 1,
 "Allstate": 13,
 "BECU": 13,
 "Bank of America": 13,
@@ -148,6 +149,7 @@
 "Cigna / Evernorth": 14,
 "Citi": 18,
 "Devoted Health": 13,
+"Elastic": 1,
 "Elevance Health": 13,
 "Equifax": 13,
 "Evolent": 13,
@@ -174,6 +176,7 @@
 "PNC": 13,
 "Palantir": 1,
 "PayPal": 13,
+"Payoneer": 1,
 "Pfizer": 13,
 "Porch Insurance": 13,
 "Prime Therapeutics": 13,
@@ -194,12 +197,13 @@
 "USAA": 13,
 "Unum": 13,
 "Wells Fargo": 13,
-"Zelis": 29,
-"Zillow": 14
+"Zelis": 30,
+"Zillow": 14,
+"Zus Health": 1
 },
 "lower": 75,
 "reposts": 4,
-"runs": 73,
+"runs": 74,
 "tier1": 24,
 "tier2": 59,
 "week": "2026-W47"
