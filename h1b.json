@@ -1,10 +1,26 @@
 {
  "companies": {
+  "Abbott": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Abridge": {
    "all_roles": 28,
    "data_roles": 0
   },
+  "Acorns": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Adobe": {
+   "all_roles": 1220,
+   "data_roles": 123
+  },
   "Adyen": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Adzuna (many employers)": {
    "all_roles": 0,
    "data_roles": 0
   },
@@ -36,6 +52,10 @@
    "all_roles": 48,
    "data_roles": 6
   },
+  "Alma": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Amplitude": {
    "all_roles": 27,
    "data_roles": 3
@@ -43,6 +63,14 @@
   "Angle Health": {
    "all_roles": 1,
    "data_roles": 0
+  },
+  "Anterior": {
+   "all_roles": 1,
+   "data_roles": 0
+  },
+  "Arcadia": {
+   "all_roles": 16,
+   "data_roles": 3
   },
   "Artera": {
    "all_roles": 2,
@@ -64,6 +92,10 @@
    "all_roles": 31,
    "data_roles": 10
   },
+  "BECU": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Bank of America": {
    "all_roles": 842,
    "data_roles": 189
@@ -80,6 +112,10 @@
    "all_roles": 0,
    "data_roles": 0
   },
+  "Bill.com": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Blend": {
    "all_roles": 0,
    "data_roles": 0
@@ -88,9 +124,17 @@
    "all_roles": 121,
    "data_roles": 31
   },
+  "Blue Cross Blue Shield of Louisiana": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Blue Cross NC": {
    "all_roles": 2,
    "data_roles": 1
+  },
+  "Branch": {
+   "all_roles": 0,
+   "data_roles": 0
   },
   "Brex": {
    "all_roles": 22,
@@ -116,6 +160,10 @@
    "all_roles": 168,
    "data_roles": 19
   },
+  "CareSource": {
+   "all_roles": 55,
+   "data_roles": 15
+  },
   "Carrot Fertility": {
    "all_roles": 0,
    "data_roles": 0
@@ -139,6 +187,14 @@
   "Chime": {
    "all_roles": 0,
    "data_roles": 0
+  },
+  "Cigna / Evernorth": {
+   "all_roles": 368,
+   "data_roles": 36
+  },
+  "Citi": {
+   "all_roles": 1593,
+   "data_roles": 1102
   },
   "Clarify Health": {
    "all_roles": 0,
@@ -200,6 +256,10 @@
    "all_roles": 4,
    "data_roles": 3
   },
+  "DailyPay": {
+   "all_roles": 2,
+   "data_roles": 1
+  },
   "Databricks": {
    "all_roles": 628,
    "data_roles": 57
@@ -252,6 +312,10 @@
    "all_roles": 453,
    "data_roles": 99
   },
+  "Enova": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Equifax": {
    "all_roles": 200,
    "data_roles": 36
@@ -263,6 +327,14 @@
   "Ethos": {
    "all_roles": 0,
    "data_roles": 0
+  },
+  "Evolent": {
+   "all_roles": 34,
+   "data_roles": 4
+  },
+  "Experian": {
+   "all_roles": 90,
+   "data_roles": 20
   },
   "Faire": {
    "all_roles": 0,
@@ -304,6 +376,10 @@
    "all_roles": 30,
    "data_roles": 3
   },
+  "Freddie Mac": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Garner Health": {
    "all_roles": 5,
    "data_roles": 3
@@ -316,9 +392,25 @@
    "all_roles": 0,
    "data_roles": 0
   },
+  "Gopuff": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Gravie": {
    "all_roles": 2,
    "data_roles": 1
+  },
+  "Great American Insurance": {
+   "all_roles": 21,
+   "data_roles": 9
+  },
+  "Greenlight": {
+   "all_roles": 10,
+   "data_roles": 0
+  },
+  "Guardian Life": {
+   "all_roles": 62,
+   "data_roles": 14
   },
   "Gusto": {
    "all_roles": 71,
@@ -352,6 +444,10 @@
    "all_roles": 1,
    "data_roles": 0
   },
+  "Highmark Health": {
+   "all_roles": 31,
+   "data_roles": 9
+  },
   "Hightouch": {
    "all_roles": 0,
    "data_roles": 0
@@ -364,9 +460,21 @@
    "all_roles": 0,
    "data_roles": 0
   },
+  "HubSpot": {
+   "all_roles": 157,
+   "data_roles": 10
+  },
   "Humana": {
    "all_roles": 346,
    "data_roles": 65
+  },
+  "Huntington Bank": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Imprint": {
+   "all_roles": 10,
+   "data_roles": 3
   },
   "Included Health": {
    "all_roles": 17,
@@ -388,6 +496,14 @@
    "all_roles": 3,
    "data_roles": 2
   },
+  "Intel": {
+   "all_roles": 1991,
+   "data_roles": 71
+  },
+  "JPMorgan Chase": {
+   "all_roles": 3286,
+   "data_roles": 583
+  },
   "Judi Health (Capital Rx)": {
    "all_roles": 12,
    "data_roles": 4
@@ -396,9 +512,17 @@
    "all_roles": 11,
    "data_roles": 1
   },
+  "Kemper": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Kettle": {
    "all_roles": 0,
    "data_roles": 0
+  },
+  "KeyBank": {
+   "all_roles": 36,
+   "data_roles": 28
   },
   "Kin Insurance": {
    "all_roles": 0,
@@ -452,9 +576,21 @@
    "all_roles": 0,
    "data_roles": 0
   },
+  "Medtronic": {
+   "all_roles": 290,
+   "data_roles": 25
+  },
+  "Merck": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Mercury": {
    "all_roles": 59,
    "data_roles": 14
+  },
+  "Mission Lane": {
+   "all_roles": 2,
+   "data_roles": 2
   },
   "Mixpanel": {
    "all_roles": 6,
@@ -475,6 +611,14 @@
   "Monte Carlo": {
    "all_roles": 1,
    "data_roles": 1
+  },
+  "Morgan Stanley": {
+   "all_roles": 1133,
+   "data_roles": 41
+  },
+  "NVIDIA": {
+   "all_roles": 2985,
+   "data_roles": 89
   },
   "Nationwide": {
    "all_roles": 66,
@@ -515,6 +659,10 @@
   "Nuna": {
    "all_roles": 0,
    "data_roles": 0
+  },
+  "Okta": {
+   "all_roles": 121,
+   "data_roles": 11
   },
   "Omada Health": {
    "all_roles": 8,
@@ -560,6 +708,10 @@
    "all_roles": 46,
    "data_roles": 10
   },
+  "Pfizer": {
+   "all_roles": 48,
+   "data_roles": 5
+  },
   "Pie Insurance": {
    "all_roles": 0,
    "data_roles": 0
@@ -572,9 +724,33 @@
    "all_roles": 42,
    "data_roles": 8
   },
+  "Porch Insurance": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Prime Therapeutics": {
+   "all_roles": 13,
+   "data_roles": 3
+  },
+  "Propel": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "Prudential": {
+   "all_roles": 122,
+   "data_roles": 34
+  },
+  "R1 RCM": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Ramp": {
    "all_roles": 0,
    "data_roles": 0
+  },
+  "Raymond James": {
+   "all_roles": 90,
+   "data_roles": 26
   },
   "Reddit": {
    "all_roles": 90,
@@ -588,6 +764,10 @@
    "all_roles": 0,
    "data_roles": 0
   },
+  "Rightway": {
+   "all_roles": 4,
+   "data_roles": 4
+  },
   "Ro": {
    "all_roles": 1,
    "data_roles": 1
@@ -596,9 +776,21 @@
    "all_roles": 202,
    "data_roles": 29
   },
+  "Roku": {
+   "all_roles": 69,
+   "data_roles": 10
+  },
   "Rula": {
    "all_roles": 0,
    "data_roles": 0
+  },
+  "S&P Global": {
+   "all_roles": 75,
+   "data_roles": 10
+  },
+  "Salesforce": {
+   "all_roles": 2057,
+   "data_roles": 90
   },
   "Samsara": {
    "all_roles": 66,
@@ -607,6 +799,10 @@
   "Scale AI": {
    "all_roles": 93,
    "data_roles": 4
+  },
+  "Sezzle": {
+   "all_roles": 14,
+   "data_roles": 1
   },
   "Sidecar Health": {
    "all_roles": 3,
@@ -617,6 +813,10 @@
    "data_roles": 2
   },
   "SmarterDx": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
+  "SmithRx": {
    "all_roles": 0,
    "data_roles": 0
   },
@@ -648,6 +848,10 @@
    "all_roles": 6,
    "data_roles": 0
   },
+  "Stash": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "State Street": {
    "all_roles": 367,
    "data_roles": 25
@@ -672,9 +876,17 @@
    "all_roles": 0,
    "data_roles": 0
   },
+  "Synchrony": {
+   "all_roles": 65,
+   "data_roles": 20
+  },
   "Synctera": {
    "all_roles": 0,
    "data_roles": 0
+  },
+  "T. Rowe Price": {
+   "all_roles": 52,
+   "data_roles": 15
   },
   "Tala": {
    "all_roles": 0,
@@ -691,6 +903,18 @@
   "Thatch": {
    "all_roles": 0,
    "data_roles": 0
+  },
+  "The Hartford": {
+   "all_roles": 159,
+   "data_roles": 44
+  },
+  "Thermo Fisher": {
+   "all_roles": 169,
+   "data_roles": 32
+  },
+  "Thumbtack": {
+   "all_roles": 39,
+   "data_roles": 16
   },
   "Toast": {
    "all_roles": 35,
@@ -712,9 +936,21 @@
    "all_roles": 1,
    "data_roles": 1
   },
+  "Truist": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Twilio": {
    "all_roles": 96,
    "data_roles": 7
+  },
+  "U.S. Bank": {
+   "all_roles": 956,
+   "data_roles": 183
+  },
+  "UMB Bank": {
+   "all_roles": 16,
+   "data_roles": 2
   },
   "USAA": {
    "all_roles": 114,
@@ -740,13 +976,25 @@
    "all_roles": 23,
    "data_roles": 1
   },
+  "Veeva Systems": {
+   "all_roles": 62,
+   "data_roles": 4
+  },
   "Vida Health": {
    "all_roles": 0,
+   "data_roles": 0
+  },
+  "Virta Health": {
+   "all_roles": 1,
    "data_roles": 0
   },
   "Wealthfront": {
    "all_roles": 16,
    "data_roles": 5
+  },
+  "Wells Fargo": {
+   "all_roles": 662,
+   "data_roles": 193
   },
   "Wellth": {
    "all_roles": 0,
@@ -756,9 +1004,21 @@
    "all_roles": 0,
    "data_roles": 0
   },
+  "Zelis": {
+   "all_roles": 0,
+   "data_roles": 0
+  },
   "Zest AI": {
    "all_roles": 0,
    "data_roles": 0
+  },
+  "Zillow": {
+   "all_roles": 83,
+   "data_roles": 21
+  },
+  "ZipRecruiter": {
+   "all_roles": 21,
+   "data_roles": 3
   },
   "Zocdoc": {
    "all_roles": 15,
@@ -776,6 +1036,6 @@
   "FY2026 Q1"
  ],
  "period": "FY2026 Q1 to FY2026 Q4",
- "sig": "fea2607b3ff0",
- "updated": "2026-11-20"
+ "sig": "5afafd553131",
+ "updated": "2026-11-22"
 }
