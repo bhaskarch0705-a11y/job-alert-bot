@@ -17,6 +17,7 @@
 "Aptino": 1,
 "Aquestive Therapeutics Inc.": 1,
 "Arrow Senior Living-Home Office": 1,
+"Ascyndent": 1,
 "Astronics": 1,
 "Atlas Search": 1,
 "Avis Global IT Solutions Inc": 1,
@@ -35,7 +36,7 @@
 "Brigham Young University": 1,
 "Bright Vision Technologies": 3,
 "Brilliant Infotech Inc.": 1,
-"CACI International, Inc.": 1,
+"CACI International, Inc.": 2,
 "CAIS": 1,
 "CDK": 1,
 "CERNER TECHNOLOGIES LLC": 1,
@@ -214,6 +215,7 @@
 "University of Pennsylvania": 1,
 "V2Soft": 1,
 "VBeyond Corporation": 1,
+"Vaspire Technologies Inc.": 1,
 "Vericast": 1,
 "Vertiv Group": 1,
 "Victaulic": 1,
@@ -225,7 +227,8 @@
 "Yellowstone County": 1,
 "Zettalogix INC": 1,
 "ZipStaff": 2,
-"Zoipis": 1
+"Zoipis": 1,
+"eNGINE LLC": 1
 },
 "empty": {
 "Adzuna (many employers)": 153
@@ -296,14 +299,14 @@
 "Unum": 13,
 "Veeva Systems": 1,
 "Wells Fargo": 13,
-"Zelis": 144,
+"Zelis": 145,
 "Zillow": 14,
 "Zus Health": 1
 },
-"lower": 165,
-"reposts": 32,
-"runs": 188,
+"lower": 167,
+"reposts": 47,
+"runs": 189,
 "tier1": 24,
-"tier2": 86,
+"tier2": 88,
 "week": "2026-W47"
 }
