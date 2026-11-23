@@ -1,5 +1,28 @@
 {
-"pending": [],
+"pending": [
+{
+"id": "wd:cvshealth:R1076445",
+"title": "Pharmacy Eligibility/Claims Business Analyst",
+"url": "https://cvshealth.wd1.myworkdayjobs.com/CVS_Health_Careers/job/PA---Work-from-home/Pharmacy-Eligibility-Claims-Business-Analyst_R1076445-1",
+"location": "PA - Work from home",
+"age": 0,
+"pay": "$54,300.00 - $145,860.00",
+"company": "CVS Health / Aetna",
+"priority_company": true,
+"gem": false,
+"years": 4,
+"mode": "Hybrid",
+"note": "",
+"h1b": "H-1B: 195 data-role filings, 562 total (FY2026 Q1 to FY2026 Q4)",
+"score": 75,
+"tier": 2,
+"domain": "core",
+"tools": [
+"SQL"
+],
+"why": "Domain +40 (domain company) | Tools +5 (SQL) | Title +20 | Exp +10 (asks 4 yrs)"
+}
+],
 "pending_low": [],
 "last_slot": "2026-11-22-21"
 }
