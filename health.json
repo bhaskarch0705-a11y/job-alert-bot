@@ -1,13 +1,22 @@
 {
 "alerts": {
+"Boston Technology Corporation": 1,
+"Calibre Systems": 1,
 "Comcast": 1,
 "Community Care": 1,
+"Dexter Technologies": 1,
 "General Dynamics Information Technology": 1,
 "Genuine Parts Company": 1,
+"I2U Systems, Inc.": 1,
+"IntelliX Software, Inc.": 1,
 "JPMorgan Chase": 1,
+"JT4 LLC": 1,
+"SILICON TECH SOLUTIONS INC": 1,
 "Seattle Children's": 1,
 "State Street": 1,
-"Westhafen Consulting": 1
+"Visa": 1,
+"Westhafen Consulting": 1,
+"tCognition, Inc": 1
 },
 "empty": {
 "Adzuna (many employers)": 6
@@ -16,12 +25,12 @@
 "Equifax": 1,
 "Veeva Systems": 1,
 "Wells Fargo": 1,
-"Zelis": 7
+"Zelis": 8
 },
-"lower": 5,
-"reposts": 71,
-"runs": 7,
+"lower": 10,
+"reposts": 73,
+"runs": 8,
 "tier1": 1,
-"tier2": 2,
+"tier2": 6,
 "week": "2026-W48"
 }
