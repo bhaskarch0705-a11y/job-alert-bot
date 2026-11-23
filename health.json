@@ -5,20 +5,21 @@
 "General Dynamics Information Technology": 1,
 "Genuine Parts Company": 1,
 "Seattle Children's": 1,
+"State Street": 1,
 "Westhafen Consulting": 1
 },
 "empty": {
-"Adzuna (many employers)": 3
+"Adzuna (many employers)": 4
 },
 "errors": {
 "Veeva Systems": 1,
 "Wells Fargo": 1,
-"Zelis": 4
+"Zelis": 5
 },
 "lower": 5,
 "reposts": 70,
-"runs": 4,
-"tier1": 0,
+"runs": 5,
+"tier1": 1,
 "tier2": 1,
 "week": "2026-W48"
 }
