@@ -53,7 +53,7 @@
 "T. Rowe Price": 1,
 "Tekaccel, Inc": 1,
 "Teqdata": 1,
-"U.S. Bank": 1,
+"U.S. Bank": 2,
 "Unknown (via Adzuna)": 1,
 "V-CENTRIX-US LLC": 1,
 "Visa": 1,
@@ -62,7 +62,7 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 19
+"Adzuna (many employers)": 20
 },
 "errors": {
 "Cardinal Health": 1,
@@ -75,12 +75,12 @@
 "U.S. Bank": 2,
 "Veeva Systems": 1,
 "Wells Fargo": 1,
-"Zelis": 23
+"Zelis": 24
 },
 "lower": 30,
 "reposts": 76,
-"runs": 23,
+"runs": 24,
 "tier1": 9,
-"tier2": 25,
+"tier2": 26,
 "week": "2026-W48"
 }
