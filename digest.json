@@ -1,5 +1,26 @@
 {
-"pending": [],
+"pending": [
+{
+"id": "wd:highmarkhealth:J291278",
+"title": "Internal Business Systems Analyst",
+"url": "https://highmarkhealth.wd1.myworkdayjobs.com/highmark/job/PA-Working-at-Home---Pennsylvania/Internal-Business-Systems-Analyst_J291278-1",
+"location": "PA, Working at Home - Pennsylvania",
+"age": 0,
+"pay": "$58,100.00",
+"company": "Highmark Health",
+"priority_company": true,
+"gem": true,
+"years": 1,
+"mode": "On-site",
+"note": "",
+"h1b": "H-1B: 9 data-role filings, 31 total (FY2026 Q1 to FY2026 Q4)",
+"score": 70,
+"tier": 2,
+"domain": "core",
+"tools": [],
+"why": "Domain +40 (domain company) | Title +10 | Exp +10 (asks 1 yrs) | Hidden gem +10"
+}
+],
 "pending_low": [],
 "last_slot": "2026-11-23-13"
 }
