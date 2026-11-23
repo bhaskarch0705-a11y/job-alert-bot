@@ -1,5 +1,78 @@
 {
-"pending": [],
+"pending": [
+{
+"id": "wd:capitalone:R1005980",
+"title": "Sr. Business Analyst - Profitability & Growth Analysis",
+"url": "https://capitalone.wd12.myworkdayjobs.com/Capital_One/job/New-York-NY/Sr-Business-Analyst---Profitability---Growth-Analysis_R1005980",
+"location": "New York, NY",
+"age": 0,
+"pay": "$111,200 - $126,900",
+"company": "Capital One",
+"priority_company": true,
+"gem": false,
+"years": 2,
+"mode": "Hybrid",
+"note": "",
+"h1b": "H-1B: 810 data-role filings, 1744 total (FY2026 Q1 to FY2026 Q4)",
+"score": 75,
+"tier": 2,
+"domain": "core",
+"tools": [
+"SQL"
+],
+"why": "Domain +40 (domain company) | Tools +5 (SQL) | Title +20 | Exp +10 (asks 2 yrs)"
+},
+{
+"id": "wd:usbank:2026-0031851",
+"title": "Market Operations Analyst 3 - Small Business East",
+"url": "https://usbank.wd1.myworkdayjobs.com/US_Bank_Careers/job/Cincinnati-OH/Market-Operations-Analyst-3---Small-Business-East_2026-0031851",
+"location": "Cincinnati, OH",
+"age": 0,
+"pay": "$66,640.00 - $78,400.00",
+"company": "U.S. Bank",
+"priority_company": true,
+"gem": false,
+"years": null,
+"mode": "On-site",
+"note": "",
+"h1b": "H-1B: 183 data-role filings, 956 total (FY2026 Q1 to FY2026 Q4)",
+"score": 60,
+"tier": 2,
+"domain": "core",
+"tools": [
+"Excel"
+],
+"why": "Domain +40 (domain company) | Tools +5 (Excel) | Title +10 | Exp +5 (not stated)"
+},
+{
+"id": "gh:attentive:4519138009",
+"title": "Senior Software Engineer, Data Platform",
+"url": "https://job-boards.greenhouse.io/attentive/jobs/4519138009",
+"location": "United States",
+"age": 0.013736046111111112,
+"pay": "$193,461 - $220,000",
+"company": "Attentive",
+"priority_company": false,
+"gem": false,
+"years": 5,
+"mode": "Remote",
+"note": "",
+"h1b": "H-1B: 10 data-role filings, 31 total (FY2026 Q1 to FY2026 Q4)",
+"score": 50,
+"tier": 2,
+"domain": "other",
+"tools": [
+"AWS",
+"Data modeling",
+"Iceberg",
+"Kafka",
+"Snowflake",
+"Spark",
+"Terraform"
+],
+"why": "Tools +30 (AWS, Data modeling, Iceberg, Kafka, Snowflake, Spark) | Title +10 | Exp +10 (asks 5 yrs)"
+}
+],
 "pending_low": [],
 "last_slot": "2026-11-23-12"
 }
