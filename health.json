@@ -14,6 +14,7 @@
 "Cohere Health": 1,
 "Comcast": 1,
 "Community Care": 1,
+"Commure": 1,
 "Dexter Technologies": 1,
 "General Dynamics Information Technology": 1,
 "Genuine Parts Company": 1,
@@ -46,7 +47,7 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 15
+"Adzuna (many employers)": 16
 },
 "errors": {
 "Cardinal Health": 1,
@@ -59,12 +60,12 @@
 "U.S. Bank": 1,
 "Veeva Systems": 1,
 "Wells Fargo": 1,
-"Zelis": 18
+"Zelis": 19
 },
 "lower": 21,
 "reposts": 75,
-"runs": 18,
-"tier1": 7,
+"runs": 19,
+"tier1": 8,
 "tier2": 19,
 "week": "2026-W48"
 }
