@@ -19,17 +19,19 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 6
+"Adzuna (many employers)": 7
 },
 "errors": {
 "Equifax": 1,
+"Evolent": 1,
+"Gopuff": 1,
 "Veeva Systems": 1,
 "Wells Fargo": 1,
-"Zelis": 8
+"Zelis": 9
 },
 "lower": 10,
 "reposts": 73,
-"runs": 8,
+"runs": 9,
 "tier1": 1,
 "tier2": 6,
 "week": "2026-W48"
