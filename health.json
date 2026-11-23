@@ -42,22 +42,24 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 11
+"Adzuna (many employers)": 12
 },
 "errors": {
+"Cardinal Health": 1,
 "Elevance Health": 1,
 "Equifax": 1,
 "Evolent": 1,
 "Gopuff": 1,
 "Lyra Health": 1,
 "Mastercard": 1,
+"U.S. Bank": 1,
 "Veeva Systems": 1,
 "Wells Fargo": 1,
-"Zelis": 14
+"Zelis": 15
 },
 "lower": 21,
 "reposts": 75,
-"runs": 14,
+"runs": 15,
 "tier1": 6,
 "tier2": 15,
 "week": "2026-W48"
