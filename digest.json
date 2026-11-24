@@ -1,28 +1,5 @@
 {
-"pending": [
-{
-"id": "wd:capitalone:R1000662",
-"title": "Sr. Business Analyst - Retail and Small Business Bank Orgs",
-"url": "https://capitalone.wd12.myworkdayjobs.com/Capital_One/job/McLean-VA/Sr-Business-Analyst---Retail-and-Small-Business-Bank-Orgs_R1000662-1",
-"location": "McLean, VA",
-"age": 0,
-"pay": "$111,200 - $126,900",
-"company": "Capital One",
-"priority_company": true,
-"gem": false,
-"years": 2,
-"mode": "On-site",
-"note": "",
-"h1b": "H-1B: 810 data-role filings, 1744 total (FY2026 Q1 to FY2026 Q4)",
-"score": 75,
-"tier": 2,
-"domain": "core",
-"tools": [
-"SQL"
-],
-"why": "Domain +40 (domain company) | Tools +5 (SQL) | Title +20 | Exp +10 (asks 2 yrs)"
-}
-],
+"pending": [],
 "pending_low": [],
-"last_slot": "2026-11-24-14"
+"last_slot": "2026-11-24-15"
 }
