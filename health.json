@@ -125,7 +125,7 @@
 "Soojh AI Private Limited": 1,
 "Specialized": 1,
 "State Street": 3,
-"Stripe": 1,
+"Stripe": 2,
 "Swift Hire LLC": 1,
 "Symphony Corporation": 1,
 "T. Rowe Price": 1,
@@ -161,7 +161,7 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 87
+"Adzuna (many employers)": 88
 },
 "errors": {
 "CVS Health / Aetna": 2,
@@ -180,19 +180,20 @@
 "Northern Trust": 1,
 "PayPal": 1,
 "Pfizer": 1,
+"State Street": 1,
 "Trend Health Partners": 1,
 "Truist": 1,
 "U.S. Bank": 2,
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 100,
+"Zelis": 101,
 "Zillow": 1
 },
 "lower": 101,
 "reposts": 150,
-"runs": 100,
-"tier1": 21,
+"runs": 101,
+"tier1": 22,
 "tier2": 69,
 "week": "2026-W48"
 }
