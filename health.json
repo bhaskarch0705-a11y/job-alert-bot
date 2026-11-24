@@ -145,7 +145,7 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 79
+"Adzuna (many employers)": 80
 },
 "errors": {
 "CVS Health / Aetna": 2,
@@ -160,6 +160,7 @@
 "KeyBank": 1,
 "Lyra Health": 3,
 "Mastercard": 2,
+"Nationwide": 1,
 "Northern Trust": 1,
 "PayPal": 1,
 "Pfizer": 1,
@@ -168,12 +169,12 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 90,
+"Zelis": 91,
 "Zillow": 1
 },
 "lower": 88,
 "reposts": 145,
-"runs": 90,
+"runs": 91,
 "tier1": 20,
 "tier2": 61,
 "week": "2026-W48"
