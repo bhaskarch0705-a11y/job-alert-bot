@@ -160,6 +160,7 @@
 "KeyBank": 1,
 "Lyra Health": 3,
 "Mastercard": 2,
+"Northern Trust": 1,
 "PayPal": 1,
 "Pfizer": 1,
 "Trend Health Partners": 1,
@@ -171,7 +172,7 @@
 "Zillow": 1
 },
 "lower": 88,
-"reposts": 144,
+"reposts": 145,
 "runs": 88,
 "tier1": 20,
 "tier2": 61,
