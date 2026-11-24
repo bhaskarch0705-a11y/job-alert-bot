@@ -33,7 +33,7 @@
 "CVS Health / Aetna": 1,
 "Calibre Systems": 1,
 "Capgemini": 1,
-"Capital One": 2,
+"Capital One": 3,
 "CareSource": 1,
 "ChaTeck Incorporated": 1,
 "Chandra Technologies, Inc.": 2,
@@ -159,7 +159,7 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 81
+"Adzuna (many employers)": 82
 },
 "errors": {
 "CVS Health / Aetna": 2,
@@ -184,13 +184,13 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 93,
+"Zelis": 94,
 "Zillow": 1
 },
 "lower": 99,
 "reposts": 150,
-"runs": 93,
+"runs": 94,
 "tier1": 21,
-"tier2": 67,
+"tier2": 68,
 "week": "2026-W48"
 }
