@@ -121,7 +121,7 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 67
+"Adzuna (many employers)": 68
 },
 "errors": {
 "Cardinal Health": 1,
@@ -134,18 +134,18 @@
 "Great American Insurance": 1,
 "KeyBank": 1,
 "Lyra Health": 3,
-"Mastercard": 1,
+"Mastercard": 2,
 "PayPal": 1,
 "Trend Health Partners": 1,
 "U.S. Bank": 2,
 "Veeva Systems": 1,
 "Wells Fargo": 2,
-"Zelis": 76,
+"Zelis": 77,
 "Zillow": 1
 },
 "lower": 72,
 "reposts": 140,
-"runs": 76,
+"runs": 77,
 "tier1": 15,
 "tier2": 50,
 "week": "2026-W48"
