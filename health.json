@@ -24,6 +24,7 @@
 "CAI": 1,
 "CGI": 1,
 "CSZNet, Inc": 1,
+"CVS Health / Aetna": 1,
 "Calibre Systems": 1,
 "Capgemini": 1,
 "Capital One": 2,
@@ -105,7 +106,7 @@
 "Software People, Inc.": 1,
 "Soojh AI Private Limited": 1,
 "Specialized": 1,
-"State Street": 2,
+"State Street": 3,
 "Stripe": 1,
 "Swift Hire LLC": 1,
 "Symphony Corporation": 1,
@@ -134,7 +135,7 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 73
+"Adzuna (many employers)": 74
 },
 "errors": {
 "CVS Health / Aetna": 1,
@@ -153,15 +154,16 @@
 "Pfizer": 1,
 "Trend Health Partners": 1,
 "U.S. Bank": 2,
+"USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 83,
+"Zelis": 84,
 "Zillow": 1
 },
 "lower": 79,
 "reposts": 142,
-"runs": 83,
-"tier1": 17,
+"runs": 84,
+"tier1": 19,
 "tier2": 55,
 "week": "2026-W48"
 }
