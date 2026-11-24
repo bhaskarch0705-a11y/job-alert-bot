@@ -145,7 +145,7 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 80
+"Adzuna (many employers)": 81
 },
 "errors": {
 "CVS Health / Aetna": 2,
@@ -156,7 +156,7 @@
 "Evolent": 1,
 "Freddie Mac": 1,
 "Gopuff": 2,
-"Great American Insurance": 1,
+"Great American Insurance": 2,
 "KeyBank": 1,
 "Lyra Health": 3,
 "Mastercard": 2,
@@ -169,12 +169,12 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 91,
+"Zelis": 92,
 "Zillow": 1
 },
 "lower": 88,
 "reposts": 145,
-"runs": 91,
+"runs": 92,
 "tier1": 20,
 "tier2": 61,
 "week": "2026-W48"
