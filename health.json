@@ -95,7 +95,7 @@
 "Silverlink Technologies LLC": 1,
 "Software People, Inc.": 1,
 "Soojh AI Private Limited": 1,
-"State Street": 1,
+"State Street": 2,
 "Stripe": 1,
 "Swift Hire LLC": 1,
 "Symphony Corporation": 1,
@@ -121,7 +121,7 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 69
+"Adzuna (many employers)": 70
 },
 "errors": {
 "Cardinal Health": 1,
@@ -130,7 +130,7 @@
 "Equifax": 1,
 "Evolent": 1,
 "Freddie Mac": 1,
-"Gopuff": 1,
+"Gopuff": 2,
 "Great American Insurance": 1,
 "KeyBank": 1,
 "Lyra Health": 3,
@@ -140,13 +140,13 @@
 "U.S. Bank": 2,
 "Veeva Systems": 1,
 "Wells Fargo": 2,
-"Zelis": 78,
+"Zelis": 79,
 "Zillow": 1
 },
 "lower": 72,
 "reposts": 140,
-"runs": 78,
-"tier1": 15,
+"runs": 79,
+"tier1": 16,
 "tier2": 50,
 "week": "2026-W48"
 }
