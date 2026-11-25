@@ -89,6 +89,7 @@
 "Enchant\u00e9 Accessories": 1,
 "Enexus Global": 1,
 "Envista Holdings Corporation": 1,
+"Equifax": 1,
 "Everest Technologies": 2,
 "Evolent": 1,
 "Expert Technology Services": 1,
@@ -268,7 +269,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 145
+"Adzuna (many employers)": 146
 },
 "errors": {
 "Affirm": 1,
@@ -297,13 +298,13 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 165,
+"Zelis": 166,
 "Zillow": 1
 },
 "lower": 180,
 "reposts": 192,
-"runs": 165,
-"tier1": 27,
+"runs": 166,
+"tier1": 28,
 "tier2": 119,
 "week": "2026-W48"
 }
