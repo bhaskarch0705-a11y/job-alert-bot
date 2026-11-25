@@ -230,6 +230,7 @@
 "Teqdata": 1,
 "The Brixton Group": 1,
 "The Phoenix Group": 1,
+"Thermo Fisher": 1,
 "Thinking Minds Inc.": 1,
 "Thought Logic Consulting": 1,
 "Thronus Group LLC": 1,
@@ -269,7 +270,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 146
+"Adzuna (many employers)": 147
 },
 "errors": {
 "Affirm": 1,
@@ -298,13 +299,13 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 166,
+"Zelis": 167,
 "Zillow": 1
 },
 "lower": 180,
 "reposts": 192,
-"runs": 166,
+"runs": 167,
 "tier1": 28,
-"tier2": 119,
+"tier2": 120,
 "week": "2026-W48"
 }
