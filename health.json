@@ -176,7 +176,7 @@
 "tCognition, Inc": 1
 },
 "empty": {
-"Adzuna (many employers)": 119
+"Adzuna (many employers)": 120
 },
 "errors": {
 "CVS Health / Aetna": 2,
@@ -197,16 +197,16 @@
 "Pfizer": 1,
 "Trend Health Partners": 1,
 "Truist": 1,
-"U.S. Bank": 2,
+"U.S. Bank": 3,
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 134,
+"Zelis": 135,
 "Zillow": 1
 },
 "lower": 112,
 "reposts": 156,
-"runs": 134,
+"runs": 135,
 "tier1": 23,
 "tier2": 75,
 "week": "2026-W48"
