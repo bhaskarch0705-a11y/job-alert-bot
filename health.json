@@ -237,7 +237,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 130
+"Adzuna (many employers)": 131
 },
 "errors": {
 "CVS Health / Aetna": 2,
@@ -262,12 +262,12 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 147,
+"Zelis": 148,
 "Zillow": 1
 },
 "lower": 161,
 "reposts": 183,
-"runs": 147,
+"runs": 148,
 "tier1": 24,
 "tier2": 101,
 "week": "2026-W48"
