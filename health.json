@@ -235,7 +235,7 @@
 "Truist Bank": 1,
 "Truveta": 1,
 "Two Six Technologies": 1,
-"U.S. Bank": 2,
+"U.S. Bank": 3,
 "USAA - United Services Automobile Association": 1,
 "University of North Texas System": 1,
 "Unknown (via Adzuna)": 2,
@@ -263,7 +263,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 139
+"Adzuna (many employers)": 140
 },
 "errors": {
 "Affirm": 1,
@@ -291,13 +291,13 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 158,
+"Zelis": 159,
 "Zillow": 1
 },
 "lower": 178,
 "reposts": 189,
-"runs": 158,
-"tier1": 25,
+"runs": 159,
+"tier1": 26,
 "tier2": 116,
 "week": "2026-W48"
 }
