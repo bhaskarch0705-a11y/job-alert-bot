@@ -20,6 +20,7 @@
 "American Unit Inc.": 1,
 "Analytics Solutions": 2,
 "Anveta Inc": 1,
+"Apetan Consulting": 1,
 "Apex 2000": 2,
 "Apexon": 1,
 "Atash Enterprises, LLC": 1,
@@ -48,10 +49,11 @@
 "Calibre Systems": 1,
 "Capgemini": 2,
 "Capital One": 3,
+"Capital One Careers": 1,
 "CareSource": 1,
 "Centris Federal Credit Union": 1,
 "ChaTeck Incorporated": 1,
-"Chandra Technologies, Inc.": 2,
+"Chandra Technologies, Inc.": 3,
 "Chewy": 1,
 "Choice Hotels": 1,
 "Citi": 1,
@@ -70,6 +72,7 @@
 "Core Health & Fitness": 1,
 "Coretek Labs": 1,
 "Covetus": 1,
+"Credence": 1,
 "Crossword Staffing Solutions LLC": 1,
 "Cyber Sphere LLC": 1,
 "Cynet Systems": 1,
@@ -157,6 +160,7 @@
 "OPERATION SMILE INC": 1,
 "Ohm Systems, Inc": 1,
 "On-Demand Group": 1,
+"One IT Corp": 1,
 "OneBlood": 1,
 "P2PSoftTek Inc": 1,
 "PNC Bank": 1,
@@ -263,7 +267,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 142
+"Adzuna (many employers)": 141
 },
 "errors": {
 "Affirm": 1,
@@ -294,10 +298,10 @@
 "Zelis": 161,
 "Zillow": 1
 },
-"lower": 178,
-"reposts": 189,
+"lower": 180,
+"reposts": 191,
 "runs": 161,
 "tier1": 26,
-"tier2": 116,
+"tier2": 119,
 "week": "2026-W48"
 }
