@@ -93,6 +93,7 @@
 "Evolent": 1,
 "Expert Technology Services": 1,
 "FII": 1,
+"Flatiron Health": 1,
 "FourthSquare": 1,
 "Foxconn Industrial Internet - FII": 1,
 "Frontier Technology Inc.": 1,
@@ -267,7 +268,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 143
+"Adzuna (many employers)": 144
 },
 "errors": {
 "Affirm": 1,
@@ -283,6 +284,7 @@
 "KeyBank": 1,
 "Lyra Health": 4,
 "Mastercard": 2,
+"Medtronic": 1,
 "Nationwide": 1,
 "Northern Trust": 1,
 "Oscar Health": 1,
@@ -295,13 +297,13 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 163,
+"Zelis": 164,
 "Zillow": 1
 },
 "lower": 180,
-"reposts": 191,
-"runs": 163,
-"tier1": 26,
+"reposts": 192,
+"runs": 164,
+"tier1": 27,
 "tier2": 119,
 "week": "2026-W48"
 }
