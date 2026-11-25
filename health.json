@@ -263,12 +263,12 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 140
+"Adzuna (many employers)": 139
 },
 "errors": {
 "Affirm": 1,
 "CVS Health / Aetna": 2,
-"Cardinal Health": 1,
+"Cardinal Health": 2,
 "CareSource": 1,
 "Elevance Health": 1,
 "Equifax": 1,
@@ -291,12 +291,12 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 159,
+"Zelis": 158,
 "Zillow": 1
 },
 "lower": 178,
 "reposts": 189,
-"runs": 159,
+"runs": 158,
 "tier1": 25,
 "tier2": 116,
 "week": "2026-W48"
