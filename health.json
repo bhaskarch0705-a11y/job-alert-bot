@@ -237,7 +237,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 131
+"Adzuna (many employers)": 132
 },
 "errors": {
 "CVS Health / Aetna": 2,
@@ -247,7 +247,7 @@
 "Equifax": 1,
 "Evolent": 1,
 "Freddie Mac": 1,
-"Gopuff": 2,
+"Gopuff": 3,
 "Great American Insurance": 2,
 "KeyBank": 1,
 "Lyra Health": 3,
@@ -256,18 +256,19 @@
 "Northern Trust": 1,
 "PayPal": 1,
 "Pfizer": 1,
+"S&P Global": 1,
 "Trend Health Partners": 1,
 "Truist": 1,
 "U.S. Bank": 3,
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 148,
+"Zelis": 149,
 "Zillow": 1
 },
 "lower": 161,
 "reposts": 183,
-"runs": 148,
+"runs": 149,
 "tier1": 24,
 "tier2": 101,
 "week": "2026-W48"
