@@ -108,6 +108,7 @@
 "HRC Global Services": 1,
 "Hanover Insurance Group": 1,
 "Highmark Health": 1,
+"Humana": 1,
 "Hyundai-MOBIS MPMI": 1,
 "I2U Systems, Inc.": 1,
 "IO Datasphere": 1,
@@ -262,7 +263,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 137
+"Adzuna (many employers)": 138
 },
 "errors": {
 "Affirm": 1,
@@ -290,13 +291,13 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 156,
+"Zelis": 157,
 "Zillow": 1
 },
 "lower": 178,
 "reposts": 188,
-"runs": 156,
-"tier1": 24,
+"runs": 157,
+"tier1": 25,
 "tier2": 116,
 "week": "2026-W48"
 }
