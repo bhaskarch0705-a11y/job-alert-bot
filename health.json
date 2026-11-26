@@ -60,7 +60,7 @@
 "Chandra Technologies, Inc.": 3,
 "Chewy": 1,
 "Choice Hotels": 1,
-"Citi": 1,
+"Citi": 2,
 "ClickHouse": 1,
 "Cohere Health": 1,
 "Comcast": 1,
@@ -289,7 +289,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 183
+"Adzuna (many employers)": 184
 },
 "errors": {
 "Affirm": 1,
@@ -319,13 +319,13 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 206,
+"Zelis": 207,
 "Zillow": 1
 },
 "lower": 203,
 "reposts": 196,
-"runs": 206,
-"tier1": 28,
+"runs": 207,
+"tier1": 29,
 "tier2": 130,
 "week": "2026-W48"
 }
