@@ -289,7 +289,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 166
+"Adzuna (many employers)": 167
 },
 "errors": {
 "Affirm": 1,
@@ -302,7 +302,7 @@
 "Evolent": 1,
 "Freddie Mac": 1,
 "Gopuff": 3,
-"Great American Insurance": 2,
+"Great American Insurance": 3,
 "KeyBank": 1,
 "Komodo Health": 1,
 "Lyra Health": 4,
@@ -319,12 +319,12 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 189,
+"Zelis": 190,
 "Zillow": 1
 },
 "lower": 203,
 "reposts": 196,
-"runs": 189,
+"runs": 190,
 "tier1": 28,
 "tier2": 130,
 "week": "2026-W48"
