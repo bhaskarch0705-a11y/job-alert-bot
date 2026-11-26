@@ -117,6 +117,7 @@
 "FII": 1,
 "FIS Capital Markets": 1,
 "Firebird AST": 1,
+"Fiserv": 1,
 "Flatiron Health": 1,
 "FourthSquare": 1,
 "Foxconn Industrial Internet - FII": 1,
@@ -346,7 +347,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 192
+"Adzuna (many employers)": 193
 },
 "errors": {
 "Affirm": 1,
@@ -376,13 +377,13 @@
 "USAA": 1,
 "Veeva Systems": 2,
 "Wells Fargo": 2,
-"Zelis": 217,
+"Zelis": 218,
 "Zillow": 1
 },
 "lower": 253,
 "reposts": 225,
-"runs": 217,
-"tier1": 30,
+"runs": 218,
+"tier1": 31,
 "tier2": 150,
 "week": "2026-W48"
 }
