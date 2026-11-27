@@ -395,7 +395,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 252
+"Adzuna (many employers)": 253
 },
 "errors": {
 "Affirm": 1,
@@ -427,12 +427,12 @@
 "USAA": 1,
 "Veeva Systems": 3,
 "Wells Fargo": 2,
-"Zelis": 283,
+"Zelis": 284,
 "Zillow": 1
 },
 "lower": 302,
 "reposts": 241,
-"runs": 283,
+"runs": 284,
 "tier1": 32,
 "tier2": 167,
 "week": "2026-W48"
