@@ -395,7 +395,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 246
+"Adzuna (many employers)": 247
 },
 "errors": {
 "Affirm": 1,
@@ -406,6 +406,7 @@
 "Elevance Health": 1,
 "Equifax": 1,
 "Evolent": 1,
+"Fidelity": 1,
 "Freddie Mac": 1,
 "Gopuff": 4,
 "Great American Insurance": 3,
@@ -416,6 +417,7 @@
 "Nationwide": 1,
 "Northern Trust": 1,
 "Oscar Health": 1,
+"Palantir": 1,
 "PayPal": 1,
 "Pfizer": 2,
 "S&P Global": 1,
@@ -425,12 +427,12 @@
 "USAA": 1,
 "Veeva Systems": 3,
 "Wells Fargo": 2,
-"Zelis": 277,
+"Zelis": 278,
 "Zillow": 1
 },
 "lower": 302,
 "reposts": 241,
-"runs": 277,
+"runs": 278,
 "tier1": 32,
 "tier2": 167,
 "week": "2026-W48"
