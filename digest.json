@@ -1,5 +1,26 @@
 {
-"pending": [],
+"pending": [
+{
+"id": "or:jpmc:210796216",
+"title": "Business Analyst \u2013 Real-Time Payments",
+"url": "https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1001/job/210796216",
+"location": "Tampa, FL, United States",
+"age": 0.7830112031481482,
+"pay": "",
+"company": "JPMorgan Chase",
+"priority_company": true,
+"gem": false,
+"years": null,
+"mode": "On-site",
+"note": "",
+"h1b": "H-1B: 583 data-role filings, 3286 total (FY2026 Q1 to FY2026 Q4)",
+"score": 65,
+"tier": 2,
+"domain": "core",
+"tools": [],
+"why": "Domain +40 (domain company) | Title +20 | Exp +5 (not stated)"
+}
+],
 "pending_low": [],
 "last_slot": "2026-11-27-12"
 }

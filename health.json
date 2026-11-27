@@ -213,7 +213,7 @@
 "Intellectt Inc": 1,
 "IntelliX Software, Inc.": 1,
 "JBS Technologies": 2,
-"JPMorgan Chase": 2,
+"JPMorgan Chase": 3,
 "JPMorgan Chase Bank, N.A.": 2,
 "JS Solutions": 1,
 "JT4 LLC": 1,
@@ -454,7 +454,7 @@
 "\u014cura": 2
 },
 "empty": {
-"Adzuna (many employers)": 270
+"Adzuna (many employers)": 271
 },
 "errors": {
 "Affirm": 1,
@@ -486,13 +486,13 @@
 "USAA": 1,
 "Veeva Systems": 4,
 "Wells Fargo": 2,
-"Zelis": 305,
+"Zelis": 306,
 "Zillow": 1
 },
 "lower": 360,
 "reposts": 260,
-"runs": 305,
+"runs": 306,
 "tier1": 35,
-"tier2": 185,
+"tier2": 186,
 "week": "2026-W48"
 }
