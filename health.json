@@ -446,7 +446,7 @@
 "\u014cura": 2
 },
 "empty": {
-"Adzuna (many employers)": 265
+"Adzuna (many employers)": 266
 },
 "errors": {
 "Affirm": 1,
@@ -476,14 +476,14 @@
 "Truist": 1,
 "U.S. Bank": 3,
 "USAA": 1,
-"Veeva Systems": 3,
+"Veeva Systems": 4,
 "Wells Fargo": 2,
-"Zelis": 299,
+"Zelis": 300,
 "Zillow": 1
 },
 "lower": 353,
 "reposts": 256,
-"runs": 299,
+"runs": 300,
 "tier1": 34,
 "tier2": 182,
 "week": "2026-W48"
