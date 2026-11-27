@@ -216,6 +216,7 @@
 "Mavensoft Technologies, LLC": 1,
 "Mavensoft Technologies.": 1,
 "MedPro Group": 1,
+"Medtronic": 1,
 "Mercury Insurance Services, LLC": 1,
 "Mersoft Technology LLC": 1,
 "Meta": 1,
@@ -394,7 +395,7 @@
 "thyssenkrupp Materials": 1
 },
 "empty": {
-"Adzuna (many employers)": 241
+"Adzuna (many employers)": 242
 },
 "errors": {
 "Affirm": 1,
@@ -424,13 +425,13 @@
 "USAA": 1,
 "Veeva Systems": 3,
 "Wells Fargo": 2,
-"Zelis": 272,
+"Zelis": 273,
 "Zillow": 1
 },
 "lower": 302,
 "reposts": 241,
-"runs": 272,
-"tier1": 31,
+"runs": 273,
+"tier1": 32,
 "tier2": 167,
 "week": "2026-W48"
 }
