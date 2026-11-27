@@ -446,7 +446,7 @@
 "\u014cura": 2
 },
 "empty": {
-"Adzuna (many employers)": 263
+"Adzuna (many employers)": 264
 },
 "errors": {
 "Affirm": 1,
@@ -468,7 +468,7 @@
 "Nationwide": 1,
 "Northern Trust": 1,
 "Oscar Health": 1,
-"Palantir": 1,
+"Palantir": 2,
 "PayPal": 1,
 "Pfizer": 2,
 "S&P Global": 1,
@@ -478,12 +478,12 @@
 "USAA": 1,
 "Veeva Systems": 3,
 "Wells Fargo": 2,
-"Zelis": 297,
+"Zelis": 298,
 "Zillow": 1
 },
 "lower": 353,
 "reposts": 256,
-"runs": 297,
+"runs": 298,
 "tier1": 34,
 "tier2": 182,
 "week": "2026-W48"
