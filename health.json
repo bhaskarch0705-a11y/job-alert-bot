@@ -82,7 +82,7 @@
 "CGI Technologies and Solutions, Inc.": 1,
 "CIM Group": 1,
 "CSZNet, Inc": 1,
-"CVS Health / Aetna": 1,
+"CVS Health / Aetna": 2,
 "CYNET SYSTEMS": 5,
 "Calibre Systems": 1,
 "Cambia Health Solutions": 1,
@@ -168,7 +168,7 @@
 "First American": 1,
 "First Citizens Bank": 1,
 "FirstEnergy Group": 1,
-"Fiserv": 1,
+"Fiserv": 2,
 "Flatiron Health": 1,
 "FourthSquare": 1,
 "Foxconn Industrial Internet - FII": 1,
@@ -489,7 +489,7 @@
 "\u014cura": 2
 },
 "empty": {
-"Adzuna (many employers)": 276
+"Adzuna (many employers)": 277
 },
 "errors": {
 "Affirm": 1,
@@ -521,13 +521,13 @@
 "USAA": 1,
 "Veeva Systems": 4,
 "Wells Fargo": 2,
-"Zelis": 312,
+"Zelis": 313,
 "Zillow": 1
 },
 "lower": 391,
 "reposts": 265,
-"runs": 312,
-"tier1": 36,
+"runs": 313,
+"tier1": 38,
 "tier2": 199,
 "week": "2026-W48"
 }
