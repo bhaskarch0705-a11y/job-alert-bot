@@ -501,10 +501,11 @@
 "\u014cura": 2
 },
 "empty": {
-"Adzuna (many employers)": 287
+"Adzuna (many employers)": 288
 },
 "errors": {
 "Affirm": 1,
+"Blue Cross Blue Shield of Louisiana": 1,
 "CVS Health / Aetna": 2,
 "Cardinal Health": 2,
 "CareSource": 1,
@@ -538,12 +539,12 @@
 "USAA": 1,
 "Veeva Systems": 4,
 "Wells Fargo": 2,
-"Zelis": 325,
+"Zelis": 326,
 "Zillow": 1
 },
 "lower": 403,
 "reposts": 269,
-"runs": 325,
+"runs": 326,
 "tier1": 38,
 "tier2": 204,
 "week": "2026-W48"
